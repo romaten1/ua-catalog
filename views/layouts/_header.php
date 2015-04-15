@@ -1,5 +1,7 @@
 <?php
-use yii\helpers\Html;
+
+use yii\helpers\Url;
+
 ?>
 <div class="header">
     <div class="wrapper clearfix">
@@ -42,7 +44,19 @@ use yii\helpers\Html;
             <li><a href="#" title="Блог">Блог</a></li>
         </ul>
         <div class="personal-info">
-            <a href="#" title="Привіт, Таня" class="login">Привіт, Таня</a>
+            <?php
+            if (!Yii::$app->user->isGuest) {
+                ?>
+                <a href="<?= Url::to( [ '/user/settings/profile' ] ); ?>" class="login">Привіт, <?= Yii::$app->user->identity->username; ?></a>
+                <a href="<?= Url::to( [ '/user/security/logout'] ); ?>" data-method="post" title="Вийти" class="login">Вийти</a>
+            <?php
+            } else {
+                ?>
+                <a href="<?= Url::to( [ '/user/security/login' ] ); ?>" title="Вхід" class="login">Вхід</a>
+                <a href="<?= Url::to( [ '/user/registration/register' ] ); ?>" title="Зареєструватися" class="login">Зареєструватися</a>
+            <?php
+            }
+            ?>
             <a href="#" title="Моя колекція" class="my-collection">Моя колекція</a>
         </div>
         <div class="language">
