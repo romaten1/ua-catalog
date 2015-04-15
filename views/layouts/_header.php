@@ -41,13 +41,18 @@ use yii\helpers\Url;
             <li><a href="#" title="Про нас">Про нас</a></li>
             <li><a href="#" title="Події">Події</a></li>
             <li><a href="#" title="Новини">Новини</a></li>
-            <li><a href="#" title="Блог">Блог</a></li>
+            <li><a href="<?= Url::to( [ '/post' ] ); ?>" title="Блог">Блог</a></li>
         </ul>
         <div class="personal-info">
             <?php
             if (!Yii::$app->user->isGuest) {
                 ?>
                 <a href="<?= Url::to( [ '/user/settings/profile' ] ); ?>" class="login">Привіт, <?= Yii::$app->user->identity->username; ?></a>
+                <?php
+                if(Yii::$app->user->identity->username == 'admin'){ ?>
+                    <a href="<?= Url::to( [ '/admin'] ); ?>" title="Адміністрування" class="login" >Адміністрування</a>
+                <?php }
+                ?>
                 <a href="<?= Url::to( [ '/user/security/logout'] ); ?>" data-method="post" title="Вийти" class="login">Вийти</a>
             <?php
             } else {

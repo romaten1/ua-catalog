@@ -1,6 +1,6 @@
 <?php
 /* @var $this yii\web\View */
-$this->title = 'My Yii Application';
+$this->title = 'UA каталог';
 ?>
 <div class="container-main">
     <div class="slider" id="slider-image">
