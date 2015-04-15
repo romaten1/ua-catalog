@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Post;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -10,24 +11,19 @@ use yii\widgets\ActiveForm;
 
 <div class="post-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin( [
+        'options' => [ 'enctype' => 'multipart/form-data' ] // important
+    ] ); ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => 255]) ?>
 
-    <?= $form->field($model, 'text')->textarea(['rows' => 6]) ?>
+    <? if ( ! empty( $model->image )) {
+        echo Html::img( '@web/uploads/post/' . $model->image );
+    } ?>
 
-    <?= $form->field($model, 'image')->widget(
-        \trntv\filekit\widget\Upload::className(),
-        [
-            'url' => ['/file-storage/upload'],
-            'maxFileSize' => 10000000, // 10 MiB
-        ]);
-    ?>
+    <?= $form->field( $model, 'image' )->fileInput() ?>
 
-    <?= $form->field($model, 'author_id')->textInput() ?>
-
-    <?= $form->field($model, 'status')->textInput() ?>
-
+    <?= $form->field( $model, 'status' )->dropDownList( Post::getStatusArray() ) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

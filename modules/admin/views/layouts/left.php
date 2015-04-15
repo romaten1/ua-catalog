@@ -23,7 +23,9 @@ use yii\helpers\Url;
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="<?= Url::toRoute('/admin/post')?>"><i class="fa fa-angle-double-right"></i>Перелік</a></li>
-                    <li><a href="<?= Url::toRoute('/admin/post/create')?>"><i class="fa fa-angle-double-right"></i>Створити</a></li>
+                    <li><a href="<?= Url::toRoute('/admin/post/create')?>"><i class="fa fa-angle-double-right"></i>Створити заготовку</a></li>
+                    <li><a href="<?= Url::toRoute('/admin/post-lang')?>"><i class="fa fa-angle-double-right"></i>Перелік мовних версій</a></li>
+                    <li><a href="<?= Url::toRoute('/admin/post-lang/create')?>"><i class="fa fa-angle-double-right"></i>Створити мовну версію</a></li>
                 </ul>
             </li>
             <li>

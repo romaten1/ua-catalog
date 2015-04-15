@@ -26,12 +26,11 @@ AppAsset::register( $this );
     <div class="wrapper">
         <?= Breadcrumbs::widget( [
             'links'    => isset( $this->params['breadcrumbs'] ) ? $this->params['breadcrumbs'] : [ ],
-            'homeLink' => [ 'label' => 'Головна', 'url' => [ '/site/index' ] ],
+            'homeLink' => [ 'label' => Yii::t('app', 'Головна'), 'url' => [ '/site/index' ] ],
         ] ) ?>
     </div>
-
     <?= $content ?>
-    <p class="UA-brand-head">НАйпопулярніші українські виробники</p>
+    <p class="UA-brand-head"><?=  Yii::t('app', 'НАйпопулярніші українські виробники')?></p>
     <?= $this->render( '_footer' ) ?>
     <?php $this->endBody() ?>
     </body>

@@ -20,7 +20,10 @@
         "yiisoft/yii2-swiftmailer": "*",
         "dektrium/yii2-user": "0.9.*@dev",
         "trntv/yii2-file-kit": "~1.0",
-        "dmstr/yii2-adminlte-asset": "~1.1"
+        "dmstr/yii2-adminlte-asset": "~1.1",
+        "yiisoft/yii2-imagine": "~2.0",
+        "mihaildev/yii2-ckeditor": "~1.0",
+        "mihaildev/yii2-elfinder": "~1.1"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

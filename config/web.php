@@ -8,6 +8,7 @@ $config = [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'language' => 'uk',
+    'sourceLanguage' => 'en-EN',
     'modules' => [
         'user' => [
             'class' => 'dektrium\user\Module',
@@ -20,9 +21,11 @@ $config = [
     ],
     'components' => [
         'request' => [
+            'class' => 'app\components\LangRequest',
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'MAYJRupSa-qEagLa64Bf5epcw2ZFM0h_',
         ],
+
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
@@ -46,6 +49,27 @@ $config = [
                 [
                     'class' => 'yii\log\FileTarget',
                     'levels' => ['error', 'warning'],
+                ],
+            ],
+        ],
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'class'=>'app\components\LangUrlManager',
+            'rules'=>[
+                '/' => 'site/index',
+                '<controller:\w+>/<action:\w+>/*'=>'<controller>/<action>',
+            ]
+        ],
+        'i18n' => [
+            'translations' => [
+                '*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@app/messages',
+                    'sourceLanguage' => 'en',
+                    'fileMap' => [
+                        'app' => 'app.php',
+                    ],
                 ],
             ],
         ],

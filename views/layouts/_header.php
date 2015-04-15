@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Url;
+use app\components\widgets\Lang;
 
 ?>
 <div class="header">
@@ -8,9 +9,9 @@ use yii\helpers\Url;
         <div class="logo"><a href="#" title="logo"><img src="img/logo.png" alt="logo"></a>
         </div>
         <ul class="UAkatalog">
-            <li class="UAkatalog-link"><a href="#" title="Каталог">Каталог</a>
+            <li class="UAkatalog-link"><a href="#" title="Каталог"><?= Yii::t('app', 'Каталог')?></a>
                 <ul class="sub-menu-lv1">
-                    <li class="hygiene"><a href="#" title="Засоби гігієни">Засоби гігієни</a>
+                    <li class="hygiene"><a href="#" title="Засоби гігієни"><?= Yii::t('app', 'Засоби гігієни')?></a>
                         <ul class="sub-menu-lv2">
                             <li class="personal-hygiene"><a href="#" title="Особиста гігієна">Особиста гігієна</a>
                                 <ul class="sub-menu-lv3">
@@ -38,35 +39,33 @@ use yii\helpers\Url;
             </li>
         </ul>
         <ul class="main-menu">
-            <li><a href="#" title="Про нас">Про нас</a></li>
-            <li><a href="#" title="Події">Події</a></li>
-            <li><a href="#" title="Новини">Новини</a></li>
-            <li><a href="<?= Url::to( [ '/post' ] ); ?>" title="Блог">Блог</a></li>
+            <li><a href="#" title="Про нас"><?= Yii::t('app', 'Про нас') ?></a></li>
+            <li><a href="#" title="Події"><?= Yii::t('app', 'Події') ?></a></li>
+            <li><a href="#" title="Новини"><?= Yii::t('app', 'Новини') ?></a></li>
+            <li><a href="<?= Url::to( [ '/post' ] ); ?>" title="Блог"><?= Yii::t('app', 'Блог') ?></a></li>
         </ul>
         <div class="personal-info">
             <?php
             if (!Yii::$app->user->isGuest) {
                 ?>
-                <a href="<?= Url::to( [ '/user/settings/profile' ] ); ?>" class="login">Привіт, <?= Yii::$app->user->identity->username; ?></a>
+                <a href="<?= Url::to( [ '/user/settings/profile' ] ); ?>" class="login"><?=Yii::t('app', 'Привіт,')?> <?= Yii::$app->user->identity->username; ?></a>
                 <?php
                 if(Yii::$app->user->identity->username == 'admin'){ ?>
-                    <a href="<?= Url::to( [ '/admin'] ); ?>" title="Адміністрування" class="login" >Адміністрування</a>
+                    <a href="<?= Url::to( [ '/admin'] ); ?>" title="Адміністрування" class="login" ><?=Yii::t('app', 'Адміністрування')?></a>
                 <?php }
                 ?>
-                <a href="<?= Url::to( [ '/user/security/logout'] ); ?>" data-method="post" title="Вийти" class="login">Вийти</a>
+                <a href="<?= Url::to( [ '/user/security/logout'] ); ?>" data-method="post" title="Вийти" class="login"><?=Yii::t('app', 'Вийти')?></a>
             <?php
             } else {
                 ?>
-                <a href="<?= Url::to( [ '/user/security/login' ] ); ?>" title="Вхід" class="login">Вхід</a>
-                <a href="<?= Url::to( [ '/user/registration/register' ] ); ?>" title="Зареєструватися" class="login">Зареєструватися</a>
+                <a href="<?= Url::to( [ '/user/security/login' ] ); ?>" title="Вхід" class="login"><?=Yii::t('app', 'Вхід')?></a>
+                <a href="<?= Url::to( [ '/user/registration/register' ] ); ?>" title="Зареєструватися" class="login"><?=Yii::t('app', 'Зареєструватися')?></a>
             <?php
             }
             ?>
-            <a href="#" title="Моя колекція" class="my-collection">Моя колекція</a>
+            <a href="#" title="Моя колекція" class="my-collection"><?=Yii::t('app', 'Моя колекція')?></a>
         </div>
-        <div class="language">
-            <a href="#" title="Укр" class="UA active">Укр</a>
-            <a href="#" title="Рос" class="RU">Рос</a>
-        </div>
+        <?= Lang::widget();?>
+
     </div>
 </div>

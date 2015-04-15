@@ -5,11 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use app\models\PostLang;
 
 /**
- * Postsearch represents the model behind the search form about `app\models\Post`.
+ * PostLangSearch represents the model behind the search form about `app\models\PostLang`.
  */
-class PostSearch extends Post
+class PostLangSearch extends PostLang
 {
     /**
      * @inheritdoc
@@ -17,8 +18,8 @@ class PostSearch extends Post
     public function rules()
     {
         return [
-            [['id', 'author_id', 'status', 'updated_at', 'created_at'], 'integer'],
-            [['title', 'image'], 'safe'],
+            [['id', 'post_id', 'lang_id'], 'integer'],
+            [['title', 'text'], 'safe'],
         ];
     }
 
@@ -40,7 +41,7 @@ class PostSearch extends Post
      */
     public function search($params)
     {
-        $query = Post::find();
+        $query = PostLang::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -56,14 +57,12 @@ class PostSearch extends Post
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'author_id' => $this->author_id,
-            'status' => $this->status,
-            'updated_at' => $this->updated_at,
-            'created_at' => $this->created_at,
+            'post_id' => $this->post_id,
+            'lang_id' => $this->lang_id,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'image', $this->image]);
+            ->andFilterWhere(['like', 'text', $this->text]);
 
         return $dataProvider;
     }

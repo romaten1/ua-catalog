@@ -4,13 +4,13 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Post */
+/* @var $model app\models\PostLang */
 
-$this->title = Yii::t('app', 'Створити заготовку статті');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Posts'), 'url' => ['index']];
+$this->title = Yii::t('app', 'Create Post Lang');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Post Langs'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="post-create">
+<div class="post-lang-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

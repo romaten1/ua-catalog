@@ -6,14 +6,12 @@ use app\models\query\PostQuery;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
-use trntv\filekit\behaviors\UploadBehavior;
 
 /**
  * This is the model class for table "post".
  *
  * @property integer $id
  * @property string $title
- * @property string $text
  * @property string $image
  * @property integer $author_id
  * @property integer $status
@@ -48,10 +46,6 @@ class Post extends ActiveRecord
     {
         return [
             TimestampBehavior::className(),
-            [
-                'class' => UploadBehavior::className(),
-                'attribute' => 'image',
-            ]
         ];
     }
 
@@ -61,8 +55,7 @@ class Post extends ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'text', 'author_id'], 'required'],
-            [['text'], 'string'],
+            [['title', 'author_id'], 'required'],
             [['author_id', 'status', 'updated_at', 'created_at'], 'integer'],
             [['title', 'image'], 'string', 'max' => 255]
         ];
@@ -75,8 +68,7 @@ class Post extends ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'title' => Yii::t('app', 'Назва'),
-            'text' => Yii::t('app', 'Зміст'),
+            'title' => Yii::t('app', 'Назва українською'),
             'image' => Yii::t('app', 'Фотографія'),
             'author_id' => Yii::t('app', 'Автор'),
             'status' => Yii::t('app', 'Опубліковано'),
@@ -92,4 +84,28 @@ class Post extends ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'author_id']);
     }
+
+    /**
+     * @param null $lang_id
+     *
+     * @return static
+     */
+    public function getContent($lang_id = null)
+    {
+        $lang_id = ($lang_id === null)? Lang::getCurrent()->id : $lang_id;
+
+        return $this->hasOne(PostLang::className(), ['post_id' => 'id'])->where('lang_id = :lang_id', [':lang_id' => $lang_id]);
+    }
+
+    /**
+     * @return array
+     */
+    public static function getStatusArray()
+    {
+        return [
+            self::STATUS_PUBLISHED => 'Опубліковано',
+            self::STATUS_DRAFT => 'Чорновик',
+        ];
+    }
+
 }
