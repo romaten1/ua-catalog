@@ -3,10 +3,9 @@
 namespace app\models;
 
 use app\models\query\PostQuery;
+use app\modules\admin\models\PostLang;
 use Yii;
 use yii\behaviors\TimestampBehavior;
-use yii\db\ActiveRecord;
-use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "post".
@@ -21,9 +20,6 @@ use yii\helpers\ArrayHelper;
  */
 class Post extends Root
 {
-    const STATUS_PUBLISHED = 1;
-    const STATUS_DRAFT = 0;
-
     /**
      * @inheritdoc
      */

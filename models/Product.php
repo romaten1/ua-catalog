@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\modules\admin\models\ProductLang;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -87,5 +88,19 @@ class Product extends Root
     public function getManufacturer()
     {
         return $this->hasOne(Manufacturer::className(), ['id' => 'manufacturer_id']);
+    }
+
+    /**
+     * @return array
+     */
+    public static function getProductArray()
+    {
+        $product = new Product;
+        $product = $product->find()->asArray()->all();
+        $titles = [];
+        foreach($product as $item){
+            $titles[$item['id']] = $item['title'];
+        }
+        return array_unique($titles);
     }
 }

@@ -2,9 +2,9 @@
 
 namespace app\modules\admin\controllers;
 
+use app\modules\admin\models\StaticLang;
+use app\modules\admin\models\StaticLangSearch;
 use Yii;
-use app\models\StaticLang;
-use app\models\StaticLangSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -14,6 +14,9 @@ use yii\filters\VerbFilter;
  */
 class StaticLangController extends Controller
 {
+    /**
+     * @return array
+     */
     public function behaviors()
     {
         return [

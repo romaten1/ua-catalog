@@ -4,7 +4,6 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Post;
-use app\models\Postsearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -14,6 +13,21 @@ use yii\filters\VerbFilter;
  */
 class PostController extends Controller
 {
+    /**
+     * @return array
+     */
+    public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['post'],
+                ],
+            ],
+        ];
+    }
+
     /**
      * Lists all Post models.
      * @return mixed

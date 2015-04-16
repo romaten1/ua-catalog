@@ -3,9 +3,9 @@
 namespace app\modules\admin\controllers;
 
 use app\helpers\FileHelper;
+use app\models\search\ManufacturerSearch;
 use Yii;
 use app\models\Manufacturer;
-use app\models\ManufacturerSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -16,6 +16,9 @@ use yii\web\UploadedFile;
  */
 class ManufacturerController extends Controller
 {
+    /**
+     * @return array
+     */
     public function behaviors()
     {
         return [

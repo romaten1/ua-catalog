@@ -2,9 +2,9 @@
 
 namespace app\modules\admin\controllers;
 
+use app\modules\admin\models\ManufacturerLang;
+use app\modules\admin\models\ManufacturerLangSearch;
 use Yii;
-use app\models\ManufacturerLang;
-use app\models\ManufacturerLangSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -14,6 +14,9 @@ use yii\filters\VerbFilter;
  */
 class ManufacturerLangController extends Controller
 {
+    /**
+     * @return array
+     */
     public function behaviors()
     {
         return [

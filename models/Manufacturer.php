@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\modules\admin\models\ManufacturerLang;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 

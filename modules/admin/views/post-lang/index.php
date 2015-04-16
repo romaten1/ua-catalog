@@ -47,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'text',
                 'format'    => 'html',
                 'value'     => function ( $model ) {
-                    return StringHelper::truncateWords($model->description, 50);
+                    return StringHelper::truncateWords($model->text, 50);
                 },
             ],
             ['class' => 'yii\grid\ActionColumn'],

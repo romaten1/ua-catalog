@@ -2,9 +2,9 @@
 
 namespace app\modules\admin\controllers;
 
+use app\models\search\StaticPageSearch;
 use Yii;
 use app\models\StaticPage;
-use app\models\StaticPageSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -14,6 +14,9 @@ use yii\filters\VerbFilter;
  */
 class StaticPageController extends Controller
 {
+    /**
+     * @return array
+     */
     public function behaviors()
     {
         return [

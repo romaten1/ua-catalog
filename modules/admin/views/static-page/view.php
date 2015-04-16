@@ -1,5 +1,6 @@
 <?php
 
+use app\models\StaticPage;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -30,10 +31,23 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'title',
-            'updated_at',
-            'created_at',
-            'status',
-            'type',
+            [
+                'attribute' => 'status',
+                'value'     => StaticPage::getStatus( $model->status ),
+            ],
+            [
+                'attribute' => 'updated_at',
+                'format'    => 'date',
+            ],
+            [
+                'attribute' => 'created_at',
+                'format'    => 'date',
+            ],
+
+            [
+                'attribute' => 'type',
+                'value'     => StaticPage::getType( $model->type ),
+            ],
         ],
     ]) ?>
 

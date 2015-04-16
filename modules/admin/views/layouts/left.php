@@ -54,6 +54,73 @@ use yii\helpers\Url;
                     <li><a href="<?= Url::toRoute('/admin/manufacturer-lang/create')?>"><i class="fa fa-angle-double-right"></i>Створити мовну версію опису виробника</a></li>
                 </ul>
             </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-sitemap"></i>
+                    <span>Категорії</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="<?= Url::toRoute('/admin/category')?>"><i class="fa fa-angle-double-right"></i>Перелік категорій</a></li>
+                    <li><a href="<?= Url::toRoute('/admin/category/create')?>"><i class="fa fa-angle-double-right"></i>Створити категорію</a></li>
+                    <li><a href="<?= Url::toRoute('/admin/category-lang')?>"><i class="fa fa-angle-double-right"></i>Перелік мовних версій описів категорій</a></li>
+                    <li><a href="<?= Url::toRoute('/admin/category-lang/create')?>"><i class="fa fa-angle-double-right"></i>Створити мовну версію опису категорії</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="<?= Url::toRoute('/admin/collection')?>">
+                    <i class="fa fa-shopping-cart"></i> <span>Колекції користувачів</span>
+                </a>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-paper-plane"></i>
+                    <span>Електронні адреси для розсилки</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="<?= Url::toRoute('/admin/email')?>"><i class="fa fa-angle-double-right"></i>Перелік електронних пошт</a></li>
+                    <li><a href="<?= Url::toRoute('/admin/email/create')?>"><i class="fa fa-angle-double-right"></i>Внести електронну пошту в перелік</a></li>
+                    <li><a href="<?= Url::toRoute('/admin/email/send-email')?>"><i class="fa fa-angle-double-right"></i>Розіслати пошту підписникам</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-newspaper-o"></i>
+                    <span>Новини</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="<?= Url::toRoute('/admin/news')?>"><i class="fa fa-angle-double-right"></i>Перелік новин</a></li>
+                    <li><a href="<?= Url::toRoute('/admin/news/create')?>"><i class="fa fa-angle-double-right"></i>Створити новину</a></li>
+                    <li><a href="<?= Url::toRoute('/admin/news-lang')?>"><i class="fa fa-angle-double-right"></i>Перелік мовних версій описів новин</a></li>
+                    <li><a href="<?= Url::toRoute('/admin/news-lang/create')?>"><i class="fa fa-angle-double-right"></i>Створити мовну версію опису новини</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-thumbs-up"></i>
+                    <span>Магазини</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="<?= Url::toRoute('/admin/shop')?>"><i class="fa fa-angle-double-right"></i>Перелік магазинів</a></li>
+                    <li><a href="<?= Url::toRoute('/admin/shop/create')?>"><i class="fa fa-angle-double-right"></i>Створити магазин</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-bookmark-o"></i>
+                    <span>Статичні сторінки</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="<?= Url::toRoute('/admin/static-page')?>"><i class="fa fa-angle-double-right"></i>Перелік статичних сторінок</a></li>
+                    <li><a href="<?= Url::toRoute('/admin/static-page/create')?>"><i class="fa fa-angle-double-right"></i>Створити статичну сторінку</a></li>
+                    <li><a href="<?= Url::toRoute('/admin/static-lang')?>"><i class="fa fa-angle-double-right"></i>Перелік мовних версій описів статичних сторінок</a></li>
+                    <li><a href="<?= Url::toRoute('/admin/static-lang/create')?>"><i class="fa fa-angle-double-right"></i>Створити мовну версію опису статичної сторінки</a></li>
+                </ul>
+            </li>
             <li>
                 <a href="<?= Url::toRoute('/user/admin/index')?>">
                     <i class="fa fa-user"></i> <span>Користувачі</span>

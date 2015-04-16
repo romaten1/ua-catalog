@@ -2,9 +2,9 @@
 
 namespace app\controllers;
 
+use app\models\search\ManufacturerSearch;
 use Yii;
 use app\models\Manufacturer;
-use app\models\ManufacturerSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -14,6 +14,9 @@ use yii\filters\VerbFilter;
  */
 class ManufacturerController extends Controller
 {
+    /**
+     * @return array
+     */
     public function behaviors()
     {
         return [

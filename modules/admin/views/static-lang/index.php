@@ -1,7 +1,11 @@
 <?php
 
+use app\models\Lang;
+use app\models\StaticPage;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\StringHelper;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\StaticLangSearch */
@@ -25,11 +29,30 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'static_id',
-            'lang_id',
+            [
+                'attribute' => 'static_id',
+                'value'     => function ( $model ) {
+                    $page = StaticPage::findOne( $model->static_id );
+                    return $page->title;
+                },
+                'filter'    => ArrayHelper::map( StaticPage::find()->all(), 'id', 'title' ),
+            ],
+            [
+                'attribute' => 'lang_id',
+                'value'     => function ( $model ) {
+                    $lang = Lang::findOne( $model->lang_id );
+                    return $lang->name;
+                },
+                'filter'    => ArrayHelper::map( Lang::find()->all(), 'id', 'name' ),
+            ],
             'title',
-            'text:ntext',
+            [
+                'attribute' => 'text',
+                'format'    => 'html',
+                'value'     => function ( $model ) {
+                    return StringHelper::truncateWords($model->text, 50);
+                },
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

@@ -1,5 +1,6 @@
 <?php
 
+use app\models\StaticPage;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -25,12 +26,31 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
             'title',
-            'updated_at',
-            'created_at',
-            'status',
-            // 'type',
+            [
+                'attribute' => 'status',
+                'format'    => 'html',
+                'value'     => function ( $model ) {
+                    return $model->getStatusLabel();
+                },
+                'filter'    => StaticPage::getStatusArray()
+            ],
+            [
+                'attribute' => 'updated_at',
+                'format'    => 'date',
+            ],
+            [
+                'attribute' => 'created_at',
+                'format'    => 'date',
+            ],
+            [
+                'attribute' => 'type',
+                'format'    => 'html',
+                'value'     => function ( $model ) {
+                    return $model->getTypeLabel();
+                },
+                'filter'    => StaticPage::getTypeArray()
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

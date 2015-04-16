@@ -2,9 +2,9 @@
 
 namespace app\controllers;
 
+use app\models\search\ProductSearch;
 use Yii;
 use app\models\Product;
-use app\models\ProductSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -14,6 +14,9 @@ use yii\filters\VerbFilter;
  */
 class ProductController extends Controller
 {
+    /**
+     * @return array
+     */
     public function behaviors()
     {
         return [

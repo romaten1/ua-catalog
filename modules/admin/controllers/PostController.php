@@ -3,18 +3,13 @@
 namespace app\modules\admin\controllers;
 
 use app\helpers\FileHelper;
-use app\helpers\TransliterateHelper;
+use app\models\search\PostSearch;
 use Yii;
 use app\models\Post;
-use app\models\Postsearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
-use Imagine\Image\Box;
-use Imagine\Image\Point;
-use Imagine\Gd\Imagine;
-use Imagine\Image\ImageInterface;
 
 /**
  * PostController implements the CRUD actions for Post model.

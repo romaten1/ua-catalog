@@ -33,7 +33,7 @@ class Module extends \yii\base\Module
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'view', 'create', 'update', 'delete'],
+                        'actions' => ['index', 'view', 'create', 'update', 'delete', 'send-email'],
                         'matchCallback' => function ($rule, $action) {
                             return Yii::$app->getUser()->getIdentity()->username === 'admin';
                         }

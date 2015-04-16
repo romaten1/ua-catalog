@@ -2,9 +2,9 @@
 
 namespace app\modules\admin\controllers;
 
+use app\modules\admin\models\PostLang;
+use app\modules\admin\models\PostLangSearch;
 use Yii;
-use app\models\PostLang;
-use app\models\PostLangSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

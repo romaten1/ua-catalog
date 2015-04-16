@@ -1,5 +1,7 @@
 <?php
 
+use app\models\Lang;
+use app\models\StaticPage;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -29,10 +31,22 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'static_id',
-            'lang_id',
+
+            [
+                'attribute' => 'static_id',
+                'format'    => 'html',
+                'value'     => StaticPage::findOne($model->static_id)->title,
+            ],
+            [
+                'attribute' => 'lang_id',
+                'format'    => 'html',
+                'value'     => Lang::findOne($model->lang_id)->name,
+            ],
             'title',
-            'text:ntext',
+            [
+                'attribute' => 'text',
+                'format'    => 'html',
+            ],
         ],
     ]) ?>
 
