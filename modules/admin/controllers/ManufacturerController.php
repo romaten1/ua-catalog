@@ -3,27 +3,19 @@
 namespace app\modules\admin\controllers;
 
 use app\helpers\FileHelper;
-use app\helpers\TransliterateHelper;
 use Yii;
-use app\models\Post;
-use app\models\Postsearch;
+use app\models\Manufacturer;
+use app\models\ManufacturerSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
-use Imagine\Image\Box;
-use Imagine\Image\Point;
-use Imagine\Gd\Imagine;
-use Imagine\Image\ImageInterface;
 
 /**
- * PostController implements the CRUD actions for Post model.
+ * ManufacturerController implements the CRUD actions for Manufacturer model.
  */
-class PostController extends Controller
+class ManufacturerController extends Controller
 {
-    /**
-     * @return array
-     */
     public function behaviors()
     {
         return [
@@ -37,12 +29,12 @@ class PostController extends Controller
     }
 
     /**
-     * Lists all Post models.
+     * Lists all Manufacturer models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new Postsearch();
+        $searchModel = new ManufacturerSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -52,7 +44,7 @@ class PostController extends Controller
     }
 
     /**
-     * Displays a single Post model.
+     * Displays a single Manufacturer model.
      * @param integer $id
      * @return mixed
      */
@@ -64,21 +56,20 @@ class PostController extends Controller
     }
 
     /**
-     * Create a new post model
-     *
-     * @return string|\yii\web\Response
+     * Creates a new Manufacturer model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
      * @throws NotFoundHttpException
+     * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Post();
+        $model = new Manufacturer();
         // Получаем массив данных по загружамых файлах
         if ($model->load( Yii::$app->request->post() )) {
             if (isset( $model->image )) {
                 $model->image = UploadedFile::getInstance( $model, 'image' );
             }
-            $model->author_id   = Yii::$app->user->id;
-            $model = FileHelper::makeImage($model, 'post');
+            $model = FileHelper::makeImage($model, 'manufacturer', null, 200, 100);
             if ($model->validate() && $model->save(false)) {
                 return $this->redirect( [ 'view', 'id' => $model->id ] );
             } else {
@@ -92,12 +83,15 @@ class PostController extends Controller
     }
 
     /**
-     * @param $id
+     * Updates an existing Manufacturer model.
+     * If update is successful, the browser will be redirected to the 'view' page.
      *
-     * @return string|\yii\web\Response
+     * @param integer $id
+     *
      * @throws NotFoundHttpException
+     * @return mixed
      */
-    public function actionUpdate( $id )
+    public function actionUpdate($id)
     {
         $model     = $this->findModel( $id );
         $old_image = $model->image;
@@ -105,7 +99,7 @@ class PostController extends Controller
             if (isset( $model->image )) {
                 $model->image = UploadedFile::getInstance( $model, 'image' );
             }
-            $model = FileHelper::makeImage($model, 'post', $old_image);
+            $model = FileHelper::makeImage($model, 'manufacturer', $old_image, 200, 100);
             if ($model->validate() && $model->save()) {
                 return $this->redirect( [ 'view', 'id' => $model->id ] );
             } else {
@@ -119,7 +113,7 @@ class PostController extends Controller
     }
 
     /**
-     * Deletes an existing Post model.
+     * Deletes an existing Manufacturer model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -132,15 +126,15 @@ class PostController extends Controller
     }
 
     /**
-     * Finds the Post model based on its primary key value.
+     * Finds the Manufacturer model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Post the loaded model
+     * @return Manufacturer the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Post::findOne($id)) !== null) {
+        if (($model = Manufacturer::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

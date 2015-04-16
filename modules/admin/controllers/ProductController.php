@@ -3,23 +3,18 @@
 namespace app\modules\admin\controllers;
 
 use app\helpers\FileHelper;
-use app\helpers\TransliterateHelper;
 use Yii;
-use app\models\Post;
-use app\models\Postsearch;
+use app\models\Product;
+use app\models\ProductSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
-use Imagine\Image\Box;
-use Imagine\Image\Point;
-use Imagine\Gd\Imagine;
-use Imagine\Image\ImageInterface;
 
 /**
- * PostController implements the CRUD actions for Post model.
+ * ProductController implements the CRUD actions for Product model.
  */
-class PostController extends Controller
+class ProductController extends Controller
 {
     /**
      * @return array
@@ -37,12 +32,12 @@ class PostController extends Controller
     }
 
     /**
-     * Lists all Post models.
+     * Lists all Product models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new Postsearch();
+        $searchModel = new ProductSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -52,7 +47,7 @@ class PostController extends Controller
     }
 
     /**
-     * Displays a single Post model.
+     * Displays a single Product model.
      * @param integer $id
      * @return mixed
      */
@@ -64,21 +59,20 @@ class PostController extends Controller
     }
 
     /**
-     * Create a new post model
-     *
-     * @return string|\yii\web\Response
+     * Creates a new Product model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
      * @throws NotFoundHttpException
+     * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Post();
+        $model = new Product();
         // Получаем массив данных по загружамых файлах
         if ($model->load( Yii::$app->request->post() )) {
             if (isset( $model->image )) {
                 $model->image = UploadedFile::getInstance( $model, 'image' );
             }
-            $model->author_id   = Yii::$app->user->id;
-            $model = FileHelper::makeImage($model, 'post');
+            $model = FileHelper::makeImage($model, 'product', null, 625, 139);
             if ($model->validate() && $model->save(false)) {
                 return $this->redirect( [ 'view', 'id' => $model->id ] );
             } else {
@@ -92,12 +86,15 @@ class PostController extends Controller
     }
 
     /**
-     * @param $id
+     * Updates an existing Product model.
+     * If update is successful, the browser will be redirected to the 'view' page.
      *
-     * @return string|\yii\web\Response
+     * @param integer $id
+     *
      * @throws NotFoundHttpException
+     * @return mixed
      */
-    public function actionUpdate( $id )
+    public function actionUpdate($id)
     {
         $model     = $this->findModel( $id );
         $old_image = $model->image;
@@ -105,7 +102,7 @@ class PostController extends Controller
             if (isset( $model->image )) {
                 $model->image = UploadedFile::getInstance( $model, 'image' );
             }
-            $model = FileHelper::makeImage($model, 'post', $old_image);
+            $model = FileHelper::makeImage($model, 'product', $old_image, 625, 500);
             if ($model->validate() && $model->save()) {
                 return $this->redirect( [ 'view', 'id' => $model->id ] );
             } else {
@@ -119,7 +116,7 @@ class PostController extends Controller
     }
 
     /**
-     * Deletes an existing Post model.
+     * Deletes an existing Product model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -132,15 +129,15 @@ class PostController extends Controller
     }
 
     /**
-     * Finds the Post model based on its primary key value.
+     * Finds the Product model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Post the loaded model
+     * @return Product the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Post::findOne($id)) !== null) {
+        if (($model = Product::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

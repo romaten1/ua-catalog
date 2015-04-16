@@ -1,6 +1,5 @@
 <?php
 
-use app\models\Lang;
 use dektrium\user\models\User;
 use yii\helpers\Html;
 /* @var $this yii\web\View */

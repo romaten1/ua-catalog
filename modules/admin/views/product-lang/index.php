@@ -1,38 +1,42 @@
 <?php
 
 use app\models\Lang;
-use app\models\Post;
-use yii\grid\GridView;
+use app\models\Product;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use yii\grid\GridView;
 use yii\helpers\StringHelper;
-use yii\widgets\ListView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\PostLangSearch */
+/* @var $searchModel app\models\ProductLangSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Post Langs');
+$this->title = Yii::t('app', 'Product Langs');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="post-lang-index">
+<div class="product-lang-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
+    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+
     <p>
-        <?= Html::a(Yii::t('app', 'Create Post Lang'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create Product Lang'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
+
+            'id',
             [
-                'attribute' => 'post_id',
+                'attribute' => 'product_id',
                 'value'     => function ( $model ) {
-                    $post = Post::findOne( $model->post_id );
-                    return $post->title;
+                    $product = Product::findOne( $model->product_id );
+                    return $product->title;
                 },
-                'filter'    => ArrayHelper::map( Post::find()->all(), 'id', 'title' ),
+                'filter'    => ArrayHelper::map( Product::find()->all(), 'id', 'title' ),
             ],
             [
                 'attribute' => 'lang_id',
@@ -44,12 +48,13 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'title',
             [
-                'attribute' => 'text',
+                'attribute' => 'description',
                 'format'    => 'html',
                 'value'     => function ( $model ) {
                     return StringHelper::truncateWords($model->description, 50);
                 },
             ],
+
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
