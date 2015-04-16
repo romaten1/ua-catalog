@@ -1,6 +1,7 @@
 <?php
 
 use app\models\Lang;
+use dektrium\user\models\User;
 use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Post */
@@ -16,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
             Html::img( '@web/img/blog_item_1.jpg' )
         ?>
         <?php echo $model->content->text; ?><br />
-        <?php echo $model->author_id; ?><br />
+        <?php echo 'Опублікував: ' . User::findOne($model->author_id)->username . ' / ' . date('d-m-Y', $model->updated_at); ?><br />
 
     </div>
 </section>

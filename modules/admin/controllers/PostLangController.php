@@ -14,6 +14,9 @@ use yii\filters\VerbFilter;
  */
 class PostLangController extends Controller
 {
+    /**
+     * @return array
+     */
     public function behaviors()
     {
         return [

@@ -1,5 +1,7 @@
 <?php
 
+use app\models\Post;
+use dektrium\user\models\User;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -30,11 +32,28 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'title',
-            'image',
-            'author_id',
-            'status',
-            'updated_at',
-            'created_at',
+            [
+                'attribute' => 'image',
+                'value'     => $model->image ? Html::img( '@web/uploads/post/' . $model->image ) : 'Малюнок на сайті відсутній',
+                'format'    => 'html'
+            ],
+            [
+                'attribute' => 'author_id',
+                'format'    => 'html',
+                'value'     => User::findOne($model->author_id)->username,
+            ],
+            [
+                'attribute' => 'status',
+                'value'     => Post::getStatus( $model->status ),
+            ],
+            [
+                'attribute' => 'updated_at',
+                'format'    => 'date',
+            ],
+            [
+                'attribute' => 'created_at',
+                'format'    => 'date',
+            ],
         ],
     ]) ?>
 

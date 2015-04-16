@@ -1,5 +1,7 @@
 <?php
 
+use app\models\Lang;
+use app\models\Post;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -29,10 +31,21 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'post_id',
-            'lang_id',
+            [
+                'attribute' => 'post_id',
+                'format'    => 'html',
+                'value'     => Post::findOne($model->post_id)->title,
+            ],
+            [
+                'attribute' => 'lang_id',
+                'format'    => 'html',
+                'value'     => Lang::findOne($model->lang_id)->name,
+            ],
             'title',
-            'text:ntext',
+            [
+                'attribute' => 'text',
+                'format'    => 'html',
+            ],
         ],
     ]) ?>
 

@@ -1,5 +1,7 @@
 <?php
 
+use app\models\Post;
+use dektrium\user\models\User;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -25,13 +27,39 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
             'title',
-            'image',
-            'author_id',
-            'status',
-            'updated_at',
-            'created_at',
+            [
+                'attribute'      => 'image',
+                'format'         => 'image',
+                'value'          => function ( $model ) {
+                    return '/uploads/post/thumbs/thumb_' . $model->image;
+                },
+                'contentOptions' => [ 'class' => 'img-thumbnail' ]
+            ],
+
+            [
+                'attribute' => 'author_id',
+                'format'    => 'html',
+                'value'     => function ( $model ) {
+                    return User::findOne($model->author_id)->username;
+                },
+            ],
+            [
+                'attribute' => 'status',
+                'format'    => 'html',
+                'value'     => function ( $model ) {
+                    return $model->getStatusLabel();
+                },
+                'filter'    => Post::getStatusArray()
+            ],
+            [
+                'attribute' => 'updated_at',
+                'format'    => 'date',
+            ],
+            [
+                'attribute' => 'created_at',
+                'format'    => 'date',
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

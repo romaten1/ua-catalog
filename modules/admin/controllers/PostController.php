@@ -6,6 +6,7 @@ use app\helpers\TransliterateHelper;
 use Yii;
 use app\models\Post;
 use app\models\Postsearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -106,22 +107,41 @@ class PostController extends Controller
         }
     }
 
-    /**
-     * Updates an existing Post model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+    public function actionUpdate( $id )
+    {
+        $model     = $this->findModel( $id );
+        $old_image = $model->image;
+        if ($model->load( Yii::$app->request->post() )) {
+            if (isset( $model->image )) {
+                $model->image = UploadedFile::getInstance( $model, 'image' );
+            }
+            if (isset( $model->image )) {
+                $image_name      = Yii::$app->getSecurity()->generateRandomString( 5 )
+                                   . '_' . substr( TransliterateHelper::cyrillicToLatin( $model->title ), 0, 7 );
+                $image_full_name = $image_name . '.' . $model->image->extension;
+                $model->image->saveAs( 'uploads/post/' . $image_full_name );
+                $model->image = $image_full_name;
+                //Make a thumbnails
+                $path_from = Yii::getAlias( '@webroot/uploads/post/' . $image_full_name );
+                $path_to   = Yii::getAlias( '@webroot/uploads/post/thumbs/thumb_' ) . $image_full_name;
+                $this->makeImage( $path_from, $path_to, $desired_width = 120 );
+                //Make an image
+                $path_from = Yii::getAlias( '@webroot/uploads/post/' . $image_full_name );
+                $path_to   = Yii::getAlias( '@webroot/uploads/post/' ) . $image_full_name;
+                $this->makeImage( $path_from, $path_to, $desired_width = 500 );
+            } else {
+                $model->image = $old_image;
+            }
+            if ($model->validate() && $model->save()) {
+                return $this->redirect( [ 'view', 'id' => $model->id ] );
+            } else {
+                throw new NotFoundHttpException( 'Не удалось загрузить данные' );
+            }
         } else {
-            return $this->render('update', [
+            return $this->render( 'update', [
                 'model' => $model,
-            ]);
+            ] );
         }
     }
 
