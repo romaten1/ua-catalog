@@ -70,7 +70,7 @@ class Manufacturer extends Root
      */
     public static function getManufacturersArray()
     {
-        $group = Manufacturer::find()->asArray()->all();
+        $group = self::find()->asArray()->all();
         $manufacturerArray = [];
         foreach ($group as $val) {
             $manufacturerArray[$val['id']] = $val['title'];
@@ -86,8 +86,16 @@ class Manufacturer extends Root
     public function getContent($lang_id = null)
     {
         $lang_id = ($lang_id === null)? Lang::getCurrent()->id : $lang_id;
-
-        return $this->hasOne(ManufacturerLang::className(), ['manufacturer_id' => 'id'])->where('lang_id = :lang_id', [':lang_id' => $lang_id]);
+        // Для перевірки наявності перекладу поточною мовою
+        $is_translate = ManufacturerLang::find()->where(['manufacturer_id' => $this->id, 'lang_id' => $lang_id ])->one();
+        // Якщо немає перекладу для поточної мови - отримуємо дані для мови, встановленої по замовчуванню
+        if(!$is_translate){
+            $result = $this->hasOne(ManufacturerLang::className(), ['manufacturer_id' => 'id'])->where('lang_id = :lang_id', [':lang_id' => Lang::getDefaultLang()->id]);
+        }else{
+            // Якщо є переклад - виводимо його
+            $result = $this->hasOne(ManufacturerLang::className(), ['manufacturer_id' => 'id'])->where('lang_id = :lang_id', [':lang_id' => $lang_id]);
+        }
+        return $result;
     }
 
 }

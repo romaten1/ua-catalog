@@ -24,6 +24,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+        <?= Html::a(Yii::t('app', 'Список'), ['index'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Створити'), ['create'], ['class' => 'btn btn-info']) ?>
+        <?= Html::a(Yii::t('app', 'Створити переклад'), ['/admin/manufacturer-lang/create', 'manufacturer_id' => $model->id], ['class' => 'btn btn-warning']) ?>
     </p>
 
     <?= DetailView::widget([
@@ -33,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             [
                 'attribute' => 'image',
-                'value'     => $model->image ? Html::img( '@web/uploads/product/' . $model->image ) : 'Малюнок на сайті відсутній',
+                'value'     => $model->image ? Html::img( '@web/uploads/manufacturer/' . $model->image ) : 'Малюнок на сайті відсутній',
                 'format'    => 'html'
             ],
             'site',

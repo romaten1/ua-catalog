@@ -68,6 +68,9 @@ class StaticLangController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+            if(isset(Yii::$app->request->queryParams['static_id'])){
+                $model->static_id = Yii::$app->request->queryParams['static_id'];
+            }
             return $this->render('create', [
                 'model' => $model,
             ]);

@@ -43,7 +43,8 @@ class FileHelper
     {
         if (isset( $model->image )) {
             $image_name      = Yii::$app->getSecurity()->generateRandomString( 5 )
-                               . '_' . substr( TransliterateHelper::cyrillicToLatin( $model->title ), 0, 7 );
+                               . '_' . substr( TransliterateHelper::cyrillicToLatin(
+                    isset($model->title) ? $model->title : Yii::$app->getSecurity()->generateRandomString( 7 ) ), 0, 7 );
             $image_full_name = $image_name . '.' . $model->image->extension;
             $model->image->saveAs( Yii::getAlias( '@webroot/uploads/' . $type .'/' . $image_full_name ) );
             $model->image = $image_full_name;

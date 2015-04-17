@@ -2,18 +2,24 @@
 
 namespace app\modules\admin\controllers;
 
+use app\helpers\FileHelper;
+use app\models\Product;
 use Yii;
 use app\modules\admin\models\Attachments;
 use app\modules\admin\models\AttachmentsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * AttachmentsController implements the CRUD actions for Attachments model.
  */
 class AttachmentsController extends Controller
 {
+    /**
+     * @return array
+     */
     public function behaviors()
     {
         return [
@@ -56,37 +62,58 @@ class AttachmentsController extends Controller
     /**
      * Creates a new Attachments model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     * @throws NotFoundHttpException
      * @return mixed
      */
     public function actionCreate()
     {
         $model = new Attachments();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        // Получаем массив данных по загружамых файлах
+        if ($model->load( Yii::$app->request->post() )) {
+            if (isset( $model->image )) {
+                $model->image = UploadedFile::getInstance( $model, 'image' );
+            }
+            $model = FileHelper::makeImage($model, 'attachments');
+            if ($model->validate() && $model->save(false)) {
+                return $this->redirect( [ 'view', 'id' => $model->id ] );
+            } else {
+                throw new NotFoundHttpException( 'Не удалось загрузить данные' );
+            }
         } else {
-            return $this->render('create', [
+            return $this->render( 'create', [
                 'model' => $model,
-            ]);
+            ] );
         }
     }
 
     /**
      * Updates an existing Attachments model.
      * If update is successful, the browser will be redirected to the 'view' page.
+     *
      * @param integer $id
+     *
+     * @throws NotFoundHttpException
      * @return mixed
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $model     = $this->findModel( $id );
+        $old_image = $model->image;
+        if ($model->load( Yii::$app->request->post() )) {
+            if (isset( $model->image )) {
+                $model->image = UploadedFile::getInstance( $model, 'image' );
+            }
+            $model = FileHelper::makeImage($model, 'attachments', $old_image, 500, 247);
+            if ($model->validate() && $model->save()) {
+                return $this->redirect( [ 'view', 'id' => $model->id ] );
+            } else {
+                throw new NotFoundHttpException( 'Не удалось загрузить данные' );
+            }
         } else {
-            return $this->render('update', [
+            return $this->render( 'update', [
                 'model' => $model,
-            ]);
+            ] );
         }
     }
 

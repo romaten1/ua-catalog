@@ -1,16 +1,11 @@
+<?php
+
+use app\components\manufacturerWidget\ManufacturerWidget;
+?>
 <div class="footer">
-    <div class="UA-brand">
-        <div class="wrapper">
-            <ul class="UA-brand-list">
-                <li><a href="#" title="ЕтноМодерн"><img src="img/ethno.png" alt="ЕтноМодерн"></a></li>
-                <li><a href="#" title="nenka"><img src="img/nenka.png" alt="nenka"></a></li>
-                <li><a href="#" title="raslov"><img src="img/raslov.png" alt="raslov"></a></li>
-                <li><a href="#" title="sem"><img src="img/sem.png" alt="sem"></a></li>
-                <li><a href="#" title="tago"><img src="img/tago.png" alt="tago"></a></li>
-                <li><a href="#" title="corali"><img src="img/corali.jpg" alt="corali"></a></li>
-            </ul>
-        </div>
-    </div>
+
+    <?php
+    echo ManufacturerWidget::widget(); ?>
     <div class="footer-container">
         <div class="wrapper">
             <div class="footer-lists">

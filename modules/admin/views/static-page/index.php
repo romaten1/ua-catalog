@@ -52,7 +52,22 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter'    => StaticPage::getTypeArray()
             ],
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{translate} {view} {update} {delete}',
+                'buttons' => [
+
+                    'translate' => function ($url, $model) {
+                        return Html::a(
+                            '<span class="glyphicon glyphicon-globe"</span>',
+                            ['/admin/static-lang/create', 'static_id' => $model->id],
+                            [
+                                'title' => 'Створити переклад',
+                            ]
+                        );
+                    },
+                ],
+            ],
         ],
     ]); ?>
 

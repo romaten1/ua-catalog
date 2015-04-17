@@ -53,7 +53,22 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter'    => Manufacturer::getStatusArray()
             ],
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{translate} {view} {update} {delete}',
+                'buttons' => [
+
+                    'translate' => function ($url, $model) {
+                        return Html::a(
+                            '<span class="glyphicon glyphicon-globe"</span>',
+                            ['/admin/manufacturer-lang/create', 'manufacturer_id' => $model->id],
+                            [
+                                'title' => 'Створити переклад',
+                            ]
+                        );
+                    },
+                ],
+            ],
         ],
     ]); ?>
 

@@ -23,16 +23,26 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+        <?= Html::a(Yii::t('app', 'Список'), ['index'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Створити'), ['create'], ['class' => 'btn btn-info']) ?>
     </p>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'email:email',
-            'created_at',
+            [
+                'attribute' => 'email',
+                'format'    => 'date',
+            ],
+            [
+                'attribute' => 'created_at',
+                'format'    => 'date',
+            ],
             'token',
-            'time_token:datetime',
+            [
+                'attribute' => 'time_token',
+                'format'    => 'date',
+            ],
         ],
     ]) ?>
 

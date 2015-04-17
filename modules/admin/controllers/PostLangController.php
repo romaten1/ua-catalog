@@ -68,6 +68,9 @@ class PostLangController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+            if(isset(Yii::$app->request->queryParams['post_id'])){
+                $model->post_id = Yii::$app->request->queryParams['post_id'];
+            }
             return $this->render('create', [
                 'model' => $model,
             ]);

@@ -59,7 +59,22 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter'    => News::getStatusArray()
             ],
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{translate} {view} {update} {delete}',
+                'buttons' => [
+
+                    'translate' => function ($url, $model) {
+                        return Html::a(
+                            '<span class="glyphicon glyphicon-globe"</span>',
+                            ['/admin/news-lang/create', 'news_id' => $model->id],
+                            [
+                                'title' => 'Створити переклад',
+                            ]
+                        );
+                    },
+                ],
+            ],
         ],
     ]); ?>
 

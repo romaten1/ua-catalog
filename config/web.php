@@ -17,6 +17,11 @@ $config = [
         ],
         'admin' => [
             'class' => 'app\modules\admin\Module',
+            'modules' => [
+                'category' => [
+                    'class' => 'app\modules\admin\modules\category\Module',
+                ],
+            ],
         ],
     ],
     'components' => [

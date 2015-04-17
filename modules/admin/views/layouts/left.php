@@ -39,6 +39,8 @@ use yii\helpers\Url;
                     <li><a href="<?= Url::toRoute('/admin/product/create')?>"><i class="fa fa-angle-double-right"></i>Створити товар</a></li>
                     <li><a href="<?= Url::toRoute('/admin/product-lang')?>"><i class="fa fa-angle-double-right"></i>Перелік мовних версій описів товарів</a></li>
                     <li><a href="<?= Url::toRoute('/admin/product-lang/create')?>"><i class="fa fa-angle-double-right"></i>Створити мовну версію опису товару</a></li>
+                    <li><a href="<?= Url::toRoute('/admin/attachments')?>"><i class="fa fa-angle-double-right"></i>Додаткові фото для товарів</a></li>
+                    <li><a href="<?= Url::toRoute('/admin/attachments/create')?>"><i class="fa fa-angle-double-right"></i>Створити додаткові фото для товарів</a></li>
                 </ul>
             </li>
             <li class="treeview">
@@ -61,10 +63,10 @@ use yii\helpers\Url;
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="<?= Url::toRoute('/admin/category')?>"><i class="fa fa-angle-double-right"></i>Перелік категорій</a></li>
-                    <li><a href="<?= Url::toRoute('/admin/category/create')?>"><i class="fa fa-angle-double-right"></i>Створити категорію</a></li>
-                    <li><a href="<?= Url::toRoute('/admin/category-lang')?>"><i class="fa fa-angle-double-right"></i>Перелік мовних версій описів категорій</a></li>
-                    <li><a href="<?= Url::toRoute('/admin/category-lang/create')?>"><i class="fa fa-angle-double-right"></i>Створити мовну версію опису категорії</a></li>
+                    <li><a href="<?= Url::toRoute('/admin/category/category')?>"><i class="fa fa-angle-double-right"></i>Основні категорії</a></li>
+                    <li><a href="<?= Url::toRoute('/admin/category/category-second')?>"><i class="fa fa-angle-double-right"></i>Категорії другого рівня</a></li>
+                    <li><a href="<?= Url::toRoute('/admin/category/category-third')?>"><i class="fa fa-angle-double-right"></i>Категорії третього рівня</a></li>
+                    <li><a href="<?= Url::toRoute('/admin/category/category-third-manufacturer')?>"><i class="fa fa-angle-double-right"></i>Віднести виробника до категорії</a></li>
                 </ul>
             </li>
             <li>

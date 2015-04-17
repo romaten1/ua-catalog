@@ -68,6 +68,9 @@ class ManufacturerLangController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+            if(isset(Yii::$app->request->queryParams['manufacturer_id'])){
+                $model->manufacturer_id = Yii::$app->request->queryParams['manufacturer_id'];
+            }
             return $this->render('create', [
                 'model' => $model,
             ]);

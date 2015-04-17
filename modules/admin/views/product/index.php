@@ -61,7 +61,22 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'created_at',
                 'format'    => 'date',
             ],
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{translate} {view} {update} {delete}',
+                'buttons' => [
+
+                    'translate' => function ($url, $model) {
+                        return Html::a(
+                            '<span class="glyphicon glyphicon-globe"</span>',
+                            ['/admin/product-lang/create', 'product_id' => $model->id],
+                            [
+                                'title' => 'Створити переклад',
+                            ]
+                        );
+                    },
+                ],
+            ],
         ],
     ]); ?>
 

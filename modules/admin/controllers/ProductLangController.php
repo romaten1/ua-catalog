@@ -68,6 +68,9 @@ class ProductLangController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+            if(isset(Yii::$app->request->queryParams['product_id'])){
+                $model->product_id = Yii::$app->request->queryParams['product_id'];
+            }
             return $this->render('create', [
                 'model' => $model,
             ]);

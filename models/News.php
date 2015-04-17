@@ -72,7 +72,15 @@ class News extends Root
     public function getContent($lang_id = null)
     {
         $lang_id = ($lang_id === null)? Lang::getCurrent()->id : $lang_id;
-
-        return $this->hasOne(NewsLang::className(), ['news_id' => 'id'])->where('lang_id = :lang_id', [':lang_id' => $lang_id]);
+        // Для перевірки наявності перекладу поточною мовою
+        $is_translate = NewsLang::find()->where(['news_id' => $this->id, 'lang_id' => $lang_id ])->one();
+        // Якщо немає перекладу для поточної мови - отримуємо дані для мови, встановленої по замовчуванню
+        if(!$is_translate){
+            $result = $this->hasOne(NewsLang::className(), ['news_id' => 'id'])->where('lang_id = :lang_id', [':lang_id' => Lang::getDefaultLang()->id]);
+        }else{
+            // Якщо є переклад - виводимо його
+            $result = $this->hasOne(NewsLang::className(), ['news_id' => 'id'])->where('lang_id = :lang_id', [':lang_id' => $lang_id]);
+        }
+        return $result;
     }
 }

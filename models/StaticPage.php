@@ -66,6 +66,7 @@ class StaticPage extends Root
             'type' => Yii::t('app', 'Тип сторінки'),
         ];
     }
+
     /**
      * @param null $lang_id
      *
@@ -74,9 +75,18 @@ class StaticPage extends Root
     public function getContent($lang_id = null)
     {
         $lang_id = ($lang_id === null)? Lang::getCurrent()->id : $lang_id;
-
-        return $this->hasOne(StaticLang::className(), ['static_id' => 'id'])->where('lang_id = :lang_id', [':lang_id' => $lang_id]);
+        // Для перевірки наявності перекладу поточною мовою
+        $is_translate = StaticLang::find()->where(['static_id' => $this->id, 'lang_id' => $lang_id ])->one();
+        // Якщо немає перекладу для поточної мови - отримуємо дані для мови, встановленої по замовчуванню
+        if(!$is_translate){
+            $result = $this->hasOne(StaticLang::className(), ['static_id' => 'id'])->where('lang_id = :lang_id', [':lang_id' => Lang::getDefaultLang()->id]);
+        }else{
+            // Якщо є переклад - виводимо його
+            $result = $this->hasOne(StaticLang::className(), ['static_id' => 'id'])->where('lang_id = :lang_id', [':lang_id' => $lang_id]);
+        }
+        return $result;
     }
+
     /**
      * @return array
      */

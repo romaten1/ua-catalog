@@ -68,6 +68,9 @@ class NewsLangController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+            if(isset(Yii::$app->request->queryParams['news_id'])){
+                $model->news_id = Yii::$app->request->queryParams['news_id'];
+            }
             return $this->render('create', [
                 'model' => $model,
             ]);

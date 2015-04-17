@@ -6,6 +6,7 @@ use app\models\query\PostQuery;
 use app\modules\admin\models\PostLang;
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\helpers\VarDumper;
 
 /**
  * This is the model class for table "post".
@@ -90,7 +91,15 @@ class Post extends Root
     public function getContent($lang_id = null)
     {
         $lang_id = ($lang_id === null)? Lang::getCurrent()->id : $lang_id;
-
-        return $this->hasOne(PostLang::className(), ['post_id' => 'id'])->where('lang_id = :lang_id', [':lang_id' => $lang_id]);
+        // Для перевырки наявності перекладу поточною мовою
+        $is_translate = PostLang::find()->where(['post_id' => $this->id, 'lang_id' => $lang_id ])->one();
+        // Якщо немає перекладу для поточної мови - отримуємо дані для мови, встановленої по замовчуванню
+        if(!$is_translate){
+            $result = $this->hasOne(PostLang::className(), ['post_id' => 'id'])->where('lang_id = :lang_id', [':lang_id' => Lang::getDefaultLang()->id]);
+        }else{
+            // Якщо є переклад - виводимо його
+            $result = $this->hasOne(PostLang::className(), ['post_id' => 'id'])->where('lang_id = :lang_id', [':lang_id' => $lang_id]);
+        }
+        return $result;
     }
 }

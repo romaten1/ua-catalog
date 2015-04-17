@@ -2,6 +2,7 @@
 
 namespace app\models\search;
 
+use app\models\Post;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;

@@ -66,7 +66,7 @@ class Shop extends ActiveRecord
      */
     public static function getSityArray()
     {
-        $shops = new Shop;
+        $shops = new self;
         $shops = $shops->find()->asArray()->all();
         $sities = [];
         foreach($shops as $item){

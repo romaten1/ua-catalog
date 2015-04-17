@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'user_id' )->dropDownList( ArrayHelper::map(User::find()->all(), 'id', 'username' ), ['prompt'=>'']  ) ?>
 
-    <?= $form->field($model, 'product_id' )->dropDownList( ArrayHelper::map(Product::find()->all(), 'id', 'title' ), ['prompt'=>'']  ) ?>
+    <?= $form->field($model, 'product_id' )->dropDownList( Product::getProductArray(), ['prompt'=>'']  ) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

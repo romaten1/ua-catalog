@@ -3,6 +3,7 @@
 namespace app\modules\admin\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
 /**
@@ -18,6 +19,21 @@ class Attachments extends ActiveRecord
     /**
      * @inheritdoc
      */
+    public function behaviors()
+    {
+        return [
+            'timestampBehavior' => [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at'],
+                ]
+            ],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
     public static function tableName()
     {
         return 'attachments';
@@ -29,7 +45,7 @@ class Attachments extends ActiveRecord
     public function rules()
     {
         return [
-            [['product_id', 'image', 'created_at'], 'required'],
+            [['product_id'], 'required'],
             [['product_id', 'created_at'], 'integer'],
             [['image'], 'string', 'max' => 255]
         ];

@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
 /**
@@ -19,6 +20,20 @@ class Email extends ActiveRecord
     /**
      * @inheritdoc
      */
+    public function behaviors()
+    {
+        return [
+            'timestampBehavior' => [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at'],
+                ]
+            ],
+        ];
+    }
+    /**
+     * @inheritdoc
+     */
     public static function tableName()
     {
         return 'email';
@@ -30,8 +45,9 @@ class Email extends ActiveRecord
     public function rules()
     {
         return [
-            [['email', 'created_at', 'token', 'time_token'], 'required'],
+            [['email'], 'required'],
             [['created_at', 'time_token'], 'integer'],
+            [['email'], 'email'],
             [['email', 'token'], 'string', 'max' => 255]
         ];
     }
