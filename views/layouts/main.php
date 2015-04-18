@@ -30,7 +30,8 @@ AppAsset::register( $this );
         ] ) ?>
     </div>
     <?= $content ?>
-    <p class="UA-brand-head"><?=  Yii::t('app', 'НАйпопулярніші українські виробники')?></p>
+    <p class="UA-brand-head">
+        <?= Html::a( Yii::t('app', 'Найпопулярніші українські виробники'),['/manufacturer']) ?>
     <?= $this->render( '_footer' ) ?>
     <?php $this->endBody() ?>
     </body>

@@ -40,7 +40,7 @@ class ManufacturerSearch extends Manufacturer
      */
     public function search($params)
     {
-        $query = Manufacturer::find();
+        $query = Manufacturer::find()->published();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

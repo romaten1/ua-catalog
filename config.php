@@ -3,7 +3,7 @@
 return [
     // string, required, root directory of all source files
     // components, controllers, models, modules, views
-    'sourcePath' => __DIR__ . DIRECTORY_SEPARATOR . 'modules',
+    'sourcePath' => __DIR__ . DIRECTORY_SEPARATOR . 'components',
     // array, required, list of language codes that the extracted messages
     // should be translated to. For example, ['zh-CN', 'de'].
     'languages' => ['ru'],

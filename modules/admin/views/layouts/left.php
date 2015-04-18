@@ -39,8 +39,19 @@ use yii\helpers\Url;
                     <li><a href="<?= Url::toRoute('/admin/product/create')?>"><i class="fa fa-angle-double-right"></i>Створити товар</a></li>
                     <li><a href="<?= Url::toRoute('/admin/product-lang')?>"><i class="fa fa-angle-double-right"></i>Перелік мовних версій описів товарів</a></li>
                     <li><a href="<?= Url::toRoute('/admin/product-lang/create')?>"><i class="fa fa-angle-double-right"></i>Створити мовну версію опису товару</a></li>
-                    <li><a href="<?= Url::toRoute('/admin/attachments')?>"><i class="fa fa-angle-double-right"></i>Додаткові фото для товарів</a></li>
-                    <li><a href="<?= Url::toRoute('/admin/attachments/create')?>"><i class="fa fa-angle-double-right"></i>Створити додаткові фото для товарів</a></li>
+                    <li><a href="<?= Url::toRoute('/admin/shop-product')?>"><i class="fa fa-angle-double-right"></i>Перелік - в якому магазині продається товар</a></li>
+                    <li><a href="<?= Url::toRoute('/admin/shop-product/create')?>"><i class="fa fa-angle-double-right"></i>Приписати товар до магазину</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-legal"></i>
+                    <span>Додатки фото до товарів</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="<?= Url::toRoute('/admin/attachments')?>"><i class="fa fa-angle-double-right"></i>Перелік фото</a></li>
+                    <li><a href="<?= Url::toRoute('/admin/attachments/create')?>"><i class="fa fa-angle-double-right"></i>Створити фото-додаток</a></li>
                 </ul>
             </li>
             <li class="treeview">
@@ -97,6 +108,30 @@ use yii\helpers\Url;
                     <li><a href="<?= Url::toRoute('/admin/news/create')?>"><i class="fa fa-angle-double-right"></i>Створити новину</a></li>
                     <li><a href="<?= Url::toRoute('/admin/news-lang')?>"><i class="fa fa-angle-double-right"></i>Перелік мовних версій описів новин</a></li>
                     <li><a href="<?= Url::toRoute('/admin/news-lang/create')?>"><i class="fa fa-angle-double-right"></i>Створити мовну версію опису новини</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-newspaper-o"></i>
+                    <span>Події</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="<?= Url::toRoute('/admin/event')?>"><i class="fa fa-angle-double-right"></i>Перелік подій</a></li>
+                    <li><a href="<?= Url::toRoute('/admin/event/create')?>"><i class="fa fa-angle-double-right"></i>Створити подію</a></li>
+                    <li><a href="<?= Url::toRoute('/admin/event-lang')?>"><i class="fa fa-angle-double-right"></i>Перелік мовних версій описів подій</a></li>
+                    <li><a href="<?= Url::toRoute('/admin/event-lang/create')?>"><i class="fa fa-angle-double-right"></i>Створити мовну версію опису події</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-paper-plane"></i>
+                    <span>Основний слайдер</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="<?= Url::toRoute('/admin/slider-up')?>"><i class="fa fa-angle-double-right"></i>перелік слайдів</a></li>
+                    <li><a href="<?= Url::toRoute('/admin/slider-up/create')?>"><i class="fa fa-angle-double-right"></i>Створити слайд</a></li>
                 </ul>
             </li>
             <li class="treeview">

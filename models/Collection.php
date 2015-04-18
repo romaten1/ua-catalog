@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\models\query\CollectionQuery;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
@@ -39,6 +40,14 @@ class Collection extends ActiveRecord
     }
 
     /**
+     * @return CollectionQuery
+     */
+    public static function find()
+    {
+        return new CollectionQuery(get_called_class());
+    }
+
+    /**
      * @inheritdoc
      */
     public function rules()
@@ -60,5 +69,12 @@ class Collection extends ActiveRecord
             'product_id' => Yii::t('app', 'Продукт'),
             'created_at' => Yii::t('app', 'Створено'),
         ];
+    }
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProduct()
+    {
+        return $this->hasOne(Product::className(), ['id' => 'product_id']);
     }
 }

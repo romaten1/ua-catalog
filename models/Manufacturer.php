@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\models\query\ManufacturerQuery;
 use app\modules\admin\models\ManufacturerLang;
 use Yii;
 use yii\behaviors\TimestampBehavior;
@@ -19,6 +20,14 @@ use yii\behaviors\TimestampBehavior;
  */
 class Manufacturer extends Root
 {
+
+    /**
+     * @return ManufacturerQuery
+     */
+    public static function find()
+    {
+        return new ManufacturerQuery(get_called_class());
+    }
     /**
      * @return array
      */

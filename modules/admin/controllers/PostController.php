@@ -3,7 +3,7 @@
 namespace app\modules\admin\controllers;
 
 use app\helpers\FileHelper;
-use app\models\search\PostSearch;
+use app\modules\admin\models\search\PostSearch;
 use Yii;
 use app\models\Post;
 use yii\web\Controller;
@@ -37,7 +37,7 @@ class PostController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new Postsearch();
+        $searchModel = new PostSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [

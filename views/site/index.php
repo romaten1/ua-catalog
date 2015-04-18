@@ -1,6 +1,11 @@
 <?php
 /* @var $this yii\web\View */
+use app\components\blogWidget\BlogWidget;
 use app\components\categoryWidget\CategoryWidget;
+use app\components\filterWidget\FilterWidget;
+use app\components\searchWidget\SearchWidget;
+use app\modules\admin\models\SliderUp;
+use yii\helpers\Html;
 
 $this->title = 'UA каталог';
 ?>
@@ -8,7 +13,11 @@ $this->title = 'UA каталог';
     <div class="slider" id="slider-image">
         <div class="slider-content">
             <div class="slider-content-item">
-                <img src="img/slider.jpg" alt="slide-first">
+                <?php $sliders = SliderUp::find()->asArray()->all();
+                foreach($sliders as $item){
+                    echo Html::img('/uploads/slider-up/' . $item['image']);
+                }
+                ?>
             </div>
         </div>
         <div class="slider-nav">
@@ -23,17 +32,7 @@ $this->title = 'UA каталог';
             </ul>
         </div>
     </div>
-    <div class="search-block">
-        <div class="search-block-container">
-            <div class="search-head">
-                Повний каталог українських виробників
-            </div>
-            <form action="index.php" method="post">
-                <input type="text" name="search" placeholder="Назва товару"><!--
-    			--><input type="submit" name="search-buton" value=" ">
-            </form>
-        </div>
-    </div>
+    <?php echo SearchWidget::widget(); ?>
 </div>
 <div class="wrapper info">
     <p>Наразі купувати українські продукти та речі не тільки вигідно, а є вже правилом гарного тону.
@@ -47,66 +46,8 @@ $this->title = 'UA каталог';
 <?php echo CategoryWidget::widget(); ?>
 
 <div class="katalog">
-    <div class="katalog-head">
-        <div class="wrapper">
-            <span>Жіночий одяг</span>
+    <?php echo FilterWidget::widget(); ?>
 
-            <form action="index.php" method="get">
-                <label>
-                    Сортувати за:
-                    <select name="filter" id="filter">
-                        <option>Датою оновлення</option>
-                        <option>Датою оновлення</option>
-                        <option>Датою оновлення</option>
-                    </select>
-                </label>
-            </form>
-            <form action="index.php" method="get">
-                <label>
-                    Обрати регіон:
-                    <select name="region" id="region">
-                        <option>Не обрано</option>
-                        <option>Не обрано</option>
-                        <option>Не обрано</option>
-                    </select>
-                </label>
-            </form>
-        </div>
-    </div>
-    <div class="wrapper clearfix">
-        <div class="filter">
-            <div class="type-of-product">
-                <a href="#" title="Тип" class="active">Тип</a>
-                <ul id="type-of-product" class="open">
-                    <li><label><input type="checkbox" name="costum"> Костюми</label></li>
-                    <li><label><input type="checkbox" name="costum"> Піджаки</label></li>
-                    <li><label><input type="checkbox" name="costum"> Светри і гольфи</label></li>
-                    <li><label><input type="checkbox" name="costum"> Плаття</label></li>
-                    <li><label><input type="checkbox" name="costum"> Спідниці</label></li>
-                    <li><label><input type="checkbox" name="costum"> Брюки</label></li>
-                    <li><label><input type="checkbox" name="costum"> Блузи</label></li>
-                    <li><label><input type="checkbox" name="costum"> Білизна</label></li>
-                    <li><label><input type="checkbox" name="costum"> Спортивний одяг</label></li>
-                </ul>
-            </div>
-            <div class="price-range"><span>Ціновий діапазон</span>
-
-                <div class="main-line">
-                    <div class="variable-line">
-                        <span class="low-price">550</span>
-                        <span class="high-price">7580</span>
-                    </div>
-                </div>
-            </div>
-            <div class="brand">
-                <a href="#" title="Бренд">Бренд</a>
-                <ul id="brand">
-                    <li><label><input type="checkbox" name="brand1"> brand1</label></li>
-                    <li><label><input type="checkbox" name="brand2"> brand2</label></li>
-                    <li><label><input type="checkbox" name="brand3"> brand3</label></li>
-                </ul>
-            </div>
-        </div>
         <div class="katalog-content">
             <div class="breadcrumbs">
                 <a href="#" title="Одяг">Одяг</a> >
@@ -216,65 +157,8 @@ $this->title = 'UA каталог';
 <section class="slider-container">
     <div class="wrapper">
         <div class="slider-reviews" id="slider-reviews">
-            <div class="slider-reviews-content">
-                <div class="slider-reviews-content-item">
-                    <div class="clearfix">
-                        <div class="review-foto"><img src="img/reviews_1.jpg" alt="Юлія Савостіна">
-                        </div>
-                        <div class="review-info">
-                            <h1>У пошуках MADE IN UKRAINE</h1>
 
-                            <h3>Юлія Савостіна</h3>
-
-                            <p>У лютому 2013 року пообіцяла, що буде рік купувати тільки товари українського виробництва
-                                і розповідати про всі знахідки читачам <a href="#" title="Мiй блог">свого блогу</a>.
-                                Пообіцяла і зробила. Продовжує агітувати за все якісне і модне українське тепер не
-                                тільки в блозі, але і в якості керівника окремого напрямку <span>Made in Ukraine в Ekonomika Communication Hub.</span>
-                            </p>
-                            <a href="#" title="Читати детальніше" class="more-info">Читати детальніше</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="slider-reviews-content-item">
-                    <div class="clearfix">
-                        <div class="review-foto"><img src="img/reviews_1.jpg" alt="Юлія Савостіна">
-                        </div>
-                        <div class="review-info">
-                            <h1>У пошуках MADE IN UKRAINE</h1>
-
-                            <h3>Юлія Савостіна</h3>
-
-                            <p>У лютому 2013 року пообіцяла, що буде рік купувати тільки товари українського виробництва
-                                і розповідати про всі знахідки читачам <a href="#" title="Мiй блог">свого блогу</a>.
-                                Пообіцяла і зробила. Продовжує агітувати за все якісне і модне українське тепер не
-                                тільки в блозі, але і в якості керівника окремого напрямку <i>Made in Ukraine в
-                                    Ekonomika Communication Hub.</i>
-                            </p>
-                            <a href="#" title="Читати детальніше">Читати детальніше</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="slider-reviews-content-item">
-                    <div class="clearfix">
-                        <div class="review-foto"><img src="img/reviews_1.jpg" alt="Юлія Савостіна">
-                        </div>
-                        <div class="review-info">
-                            <h1>У пошуках MADE IN UKRAINE</h1>
-
-                            <h3>Юлія Савостіна</h3>
-
-                            <p>У лютому 2013 року пообіцяла, що буде рік купувати тільки товари українського виробництва
-                                і розповідати про всі знахідки читачам <a href="#" title="Мiй блог">свого блогу</a>.
-                                Пообіцяла і зробила. Продовжує агітувати за все якісне і модне українське тепер не
-                                тільки в блозі, але і в якості керівника окремого напрямку <i>Made in Ukraine в
-                                    Ekonomika Communication Hub.</i>
-                            </p>
-                            <a href="#" title="Читати детальніше">Читати детальніше</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            <?php echo BlogWidget::widget(); ?>
             <div class="slider-reviews-nav">
                 <ul class="switchers">
                     <li><a href="#" title="slide-nav" class="active"> </a></li>

@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\models\query\NewsQuery;
 use app\modules\admin\models\NewsLang;
 use Yii;
 use yii\behaviors\TimestampBehavior;
@@ -28,6 +29,14 @@ class News extends Root
             TimestampBehavior::className(),
         ];
     }
+
+    /**
+     * @return NewsQuery
+     */
+    public static function find()
+    {
+        return new NewsQuery(get_called_class());
+    }
     /**
      * @inheritdoc
      */
@@ -42,7 +51,7 @@ class News extends Root
     public function rules()
     {
         return [
-            [['title', 'image', 'author_id'], 'required'],
+            [['title', 'author_id'], 'required'],
             [['author_id', 'status', 'updated_at', 'created_at'], 'integer'],
             [['title', 'image'], 'string', 'max' => 255]
         ];

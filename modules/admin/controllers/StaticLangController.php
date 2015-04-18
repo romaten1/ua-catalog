@@ -2,8 +2,8 @@
 
 namespace app\modules\admin\controllers;
 
+use app\modules\admin\models\search\StaticLangSearch;
 use app\modules\admin\models\StaticLang;
-use app\modules\admin\models\StaticLangSearch;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;

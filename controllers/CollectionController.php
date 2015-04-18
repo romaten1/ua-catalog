@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Collection;
 use app\models\search\CollectionSearch;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -42,18 +43,6 @@ class CollectionController extends Controller
     }
 
     /**
-     * Displays a single Collection model.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
-    /**
      * Creates a new Collection model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
@@ -61,13 +50,13 @@ class CollectionController extends Controller
     public function actionCreate()
     {
         $model = new Collection();
+        $model->product_id = Yii::$app->request->queryParams['id'];
+        $model->user_id = Yii::$app->user->id;
+        if ($model->save()) {
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(Yii::$app->request->referrer);
         } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+            return $this->redirect(Yii::$app->request->referrer );
         }
     }
 

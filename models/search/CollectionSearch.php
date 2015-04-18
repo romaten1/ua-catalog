@@ -40,7 +40,7 @@ class CollectionSearch extends Collection
      */
     public function search($params)
     {
-        $query = Collection::find();
+        $query = Collection::find()->owner();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

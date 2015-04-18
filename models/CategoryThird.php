@@ -91,6 +91,19 @@ class CategoryThird extends ActiveRecord
         return $titles;
     }
 
+    public static function getFullCategory($category_id)
+    {
+        $category = new self;
+        $category = $category->findOne($category_id);
+        $second = CategorySecond::findOne($category->parent_id);
+        $first = Category::findOne($second->parent_id);
+        $second_title = $second->title;
+        $first_title = $first->title;
+        $title = $first_title . ' / ' . $second_title . ' / ' . $category->title;
+
+        return $title;
+    }
+
     /**
      * @param null $lang_id
      *

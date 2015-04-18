@@ -42,8 +42,26 @@ class ProductSearch extends Product
      */
     public function search($params)
     {
-        $query = Product::find();
+        $order_array = [];
+        if(isset(Yii::$app->request->queryParams['filter'])){
+            $filter = Yii::$app->request->queryParams['filter'];
+            switch($filter) {
+                case 'date':
+                    $order_array['updated_at'] = SORT_DESC;
+                    break;
+                case 'price-up':
+                    $order_array['price'] = SORT_ASC;
+                    break;
+                case 'price-down':
+                    $order_array['price'] = SORT_DESC;
+                    break;
+                default:
+                    $order_array['updated_at'] = SORT_DESC;
+            }
+        }
 
+        $query = Product::find()->published();
+        $query->orderBy($order_array);
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -65,7 +83,9 @@ class ProductSearch extends Product
             'created_at' => $this->created_at,
             'status' => $this->status,
         ]);
+        if(Yii::$app->request->queryParams['filter']){
 
+        }
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'image', $this->image]);
 

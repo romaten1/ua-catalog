@@ -70,10 +70,24 @@ class Shop extends ActiveRecord
         $shops = $shops->find()->asArray()->all();
         $sities = [];
         foreach($shops as $item){
-            $sity = $item['sity'];
-            $sities[$sity] = $sity;
+
+            $sities[] = $item['sity'];
         }
         return array_unique($sities);
+    }
+
+    /**
+     * @return array
+     */
+    public static function getShopArray()
+    {
+        $shop = new self;
+        $shop = $shop->find()->asArray()->all();
+        $titles = [];
+        foreach($shop as $item){
+            $titles[$item['id']] = $item['title'] . ' - ' . $item['sity'] .', ' . $item['address'];
+        }
+        return $titles;
     }
 
 

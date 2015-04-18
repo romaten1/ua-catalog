@@ -2,7 +2,8 @@
 
 namespace app\modules\admin\controllers;
 
-use app\models\search\StaticPageSearch;
+
+use app\modules\admin\models\search\StaticPageSearch;
 use Yii;
 use app\models\StaticPage;
 use yii\web\Controller;

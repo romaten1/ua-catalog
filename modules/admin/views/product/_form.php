@@ -1,5 +1,6 @@
 <?php
 
+use app\models\CategoryThird;
 use app\models\Manufacturer;
 use app\models\Product;
 use yii\helpers\Html;
@@ -20,9 +21,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'price')->textInput() ?>
 
-    <?= $form->field($model, 'category_id')->textInput() ?>
+    <?= $form->field( $model, 'category_id' )->dropDownList( CategoryThird::getCategoriesArray(), ['prompt'=>'Виберіть категорію ... '] ) ?>
 
-    <?= $form->field( $model, 'manufacturer_id' )->dropDownList( Manufacturer::getManufacturersArray() ) ?>
+    <?= $form->field( $model, 'manufacturer_id' )->dropDownList( Manufacturer::getManufacturersArray(), ['prompt'=>'Виберіть виробника ...'] ) ?>
 
     <? if ( ! empty( $model->image )) {
         echo Html::img( '@web/uploads/product/' . $model->image );

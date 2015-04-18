@@ -1,5 +1,6 @@
 <?php
 
+use app\components\manProductWidget\ManProductWidget;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -10,32 +11,20 @@ $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Manufacturers'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="manufacturer-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
+    <section class="product-page">
+        <div class="wrapper">
+            <h1><?= Html::encode( $this->title ) ?></h1>
+            <?= Html::img( '@web/uploads/manufacturer/' . $model->image)   ?><br /><br />
+            <?= Html::a($model->site, $model->site) ?><br />
+            <?php echo $model->content->description; ?><br />
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'title',
-            'image',
-            'site',
-            'updated_at',
-            'created_at',
-            'status',
-        ],
-    ]) ?>
+        <div class="such-brand-head">Інші товари виробника <?= $model->title ?></div>
+        <div class="such-brand">
+            <?= ManProductWidget::Widget(['manufacturer_id' => $model->id]) ?>
+        </div>
+        </div>
+    </section>
 
-</div>
+

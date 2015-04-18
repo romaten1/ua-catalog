@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\models\query\ProductQuery;
 use app\modules\admin\models\ProductLang;
 use Yii;
 use yii\behaviors\TimestampBehavior;
@@ -32,6 +33,14 @@ class Product extends Root
     }
 
     /**
+     * @return ProductQuery
+     */
+    public static function find()
+    {
+        return new ProductQuery(get_called_class());
+    }
+
+    /**
      * @inheritdoc
      */
     public static function tableName()
@@ -45,7 +54,7 @@ class Product extends Root
     public function rules()
     {
         return [
-            [['title', 'price', 'category_id', 'manufacturer_id', 'image', 'status'], 'required'],
+            [['title', 'price', 'category_id', 'manufacturer_id', 'status'], 'required'],
             [['price'], 'number'],
             [['category_id', 'manufacturer_id', 'updated_at', 'created_at', 'status'], 'integer'],
             [['title', 'image'], 'string', 'max' => 255]

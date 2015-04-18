@@ -1,5 +1,6 @@
 <?php
 
+use app\components\filterWidget\FilterWidget;
 use yii\helpers\Html;
 use yii\widgets\ListView;
 
@@ -10,21 +11,22 @@ use yii\widgets\ListView;
 $this->title = Yii::t('app', 'Products');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="product-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+<div class="katalog">
+    <?php echo FilterWidget::widget(); ?>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Product'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <div class="katalog-content">
+        <div class="breadcrumbs">
+            <a href="#" title="Одяг">Одяг</a> >
+            <a href="#" title="Жіночий одяг">Жіночий одяг</a>
+        </div>
+        <?= ListView::widget([
+            'dataProvider' => $dataProvider,
+            'layout' => '{items}{paginator}',
+            'itemOptions' => ['class' => 'katalog-content-item'],
+            'itemView' => '_listItem',
+        ]) ?>
 
-    <?= ListView::widget([
-        'dataProvider' => $dataProvider,
-        'itemOptions' => ['class' => 'item'],
-        'itemView' => function ($model, $key, $index, $widget) {
-            return Html::a(Html::encode($model->title), ['view', 'id' => $model->id]);
-        },
-    ]) ?>
-
+    </div>
+  </div>
 </div>

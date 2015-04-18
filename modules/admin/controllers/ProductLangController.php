@@ -3,7 +3,7 @@
 namespace app\modules\admin\controllers;
 
 use app\modules\admin\models\ProductLang;
-use app\modules\admin\models\ProductLangSearch;
+use app\modules\admin\models\search\ProductLangSearch;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;

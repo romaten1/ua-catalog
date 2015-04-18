@@ -3,7 +3,7 @@
 namespace app\modules\admin\controllers;
 
 use app\helpers\FileHelper;
-use app\models\search\ProductSearch;
+use app\modules\admin\models\search\ProductSearch;
 use Yii;
 use app\models\Product;
 use yii\web\Controller;

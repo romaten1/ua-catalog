@@ -41,8 +41,10 @@ class PostSearch extends Post
      */
     public function search($params)
     {
-        $query = Post::find();
-
+        $query = Post::find()->published();
+        $query->orderBy([
+            'created_at' => SORT_DESC,
+        ]);
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);

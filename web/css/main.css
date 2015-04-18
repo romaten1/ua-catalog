@@ -16,7 +16,7 @@ legend, td, th, ul {
 	position: relative
 }
 
-.categories .categories-item > a:before, .clearfix:after, .language a.UA:after, .sub-categories .sub-categories-item .sub-categories-lv1 > li > a:after, li.UAkatalog-link > a:after, li.hygiene:hover > a:after, li.personal-hygiene:hover > a:after {
+.categories .categories-item > a:before, .clearfix:after, .language a.UA:after, .sub-categories .sub-categories-item .sub-categories-lv1 > li > a:after, li.UAkatalog-link > a:after, li.main_category:hover > a:after, li.personal-main_category:hover > a:after {
 	content: ""
 }
 
@@ -283,11 +283,11 @@ li.UAkatalog-link:hover .sub-menu-lv1 {
 	display: block
 }
 
-li.hygiene a {
+li.main_category a {
 	position: relative
 }
 
-li.hygiene:hover > a:after {
+li.main_category:hover > a:after {
 	display: block;
 	position: absolute;
 	width: 0;
@@ -301,7 +301,7 @@ li.hygiene:hover > a:after {
 	margin-top: -9px
 }
 
-li.hygiene:hover .sub-menu-lv2 {
+li.main_category:hover .sub-menu-lv2 {
 	display: block
 }
 
@@ -315,11 +315,11 @@ li.hygiene:hover .sub-menu-lv2 {
 	padding: 43px 0 20px 0
 }
 
-li.personal-hygiene > a {
+li.personal-main_category > a {
 	position: relative
 }
 
-li.personal-hygiene:hover > a:after {
+li.personal-main_category:hover > a:after {
 	display: block;
 	position: absolute;
 	width: 0;
@@ -333,7 +333,7 @@ li.personal-hygiene:hover > a:after {
 	margin-top: -9px
 }
 
-li.personal-hygiene:hover .sub-menu-lv3 {
+li.personal-main_category:hover .sub-menu-lv3 {
 	display: block
 }
 
@@ -682,7 +682,7 @@ p.UA-brand-head {
 	background: url(../img/sprite_categories.png) no-repeat 0 0
 }
 
-.categories .categories-item > a.hygiene:before {
+.categories .categories-item > a.main_category:before {
 	background: url(../img/sprite_categories.png) no-repeat 3px -158px
 }
 
@@ -979,7 +979,7 @@ p.UA-brand-head {
 
 .katalog-content .katalog-content-item {
 	width: 259px;
-	margin-left: 86px;
+	margin-left: 80px;
 	display: inline-block;
 	height: 388px;
 	margin-bottom: 40px;
@@ -1712,6 +1712,9 @@ ul.social-list li a.pinterest:after {
 	margin: 25px 0;
 	color: #656565;
 	font-size: 21px
+}
+.such-brand-item {
+	margin-right: 30px;
 }
 
 .product-page .such-brand {

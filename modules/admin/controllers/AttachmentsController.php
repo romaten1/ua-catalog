@@ -4,9 +4,9 @@ namespace app\modules\admin\controllers;
 
 use app\helpers\FileHelper;
 use app\models\Product;
+use app\modules\admin\models\search\AttachmentsSearch;
 use Yii;
 use app\modules\admin\models\Attachments;
-use app\modules\admin\models\AttachmentsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -74,7 +74,7 @@ class AttachmentsController extends Controller
             if (isset( $model->image )) {
                 $model->image = UploadedFile::getInstance( $model, 'image' );
             }
-            $model = FileHelper::makeImage($model, 'attachments');
+            $model = FileHelper::makeImage($model, 'attachments', null, 500, 95);
             if ($model->validate() && $model->save(false)) {
                 return $this->redirect( [ 'view', 'id' => $model->id ] );
             } else {
@@ -104,7 +104,7 @@ class AttachmentsController extends Controller
             if (isset( $model->image )) {
                 $model->image = UploadedFile::getInstance( $model, 'image' );
             }
-            $model = FileHelper::makeImage($model, 'attachments', $old_image, 500, 247);
+            $model = FileHelper::makeImage($model, 'attachments', $old_image, 500, 95);
             if ($model->validate() && $model->save()) {
                 return $this->redirect( [ 'view', 'id' => $model->id ] );
             } else {

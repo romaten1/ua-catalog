@@ -78,6 +78,13 @@ $config = [
                 ],
             ],
         ],
+        'view' => [
+            'theme' => [
+                'pathMap' => [
+                    '@dektrium/user/views' => '@app/modules/admin/views/user'
+                ],
+            ],
+        ],
         'db' => require(__DIR__ . '/db.php'),
     ],
     'controllerMap' => [

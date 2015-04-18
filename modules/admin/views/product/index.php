@@ -1,5 +1,6 @@
 <?php
 
+use app\models\CategoryThird;
 use app\models\Manufacturer;
 use app\models\Product;
 use yii\helpers\Html;
@@ -28,7 +29,14 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
             'title',
             'price',
-            'category_id',
+            [
+                'attribute' => 'category_id',
+                'format'    => 'html',
+                'value'     => function ( $model ) {
+                    return CategoryThird::getFullCategory($model->category_id);
+                },
+                'filter'    => CategoryThird::getCategoriesArray()
+            ],
             [
                 'attribute' => 'manufacturer_id',
                 'format'    => 'html',

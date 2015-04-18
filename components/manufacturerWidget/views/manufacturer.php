@@ -13,7 +13,7 @@ use yii\widgets\ListView;
             foreach ($manufacturers as $item) {
                 if ($item['image']) {
                     ?>
-                    <li><a href="<?= Url::to( [ '/manufacturer/view', [ 'id' => $item['id'] ] ] ); ?>"
+                    <li><a href="<?= Url::to( [ '/manufacturer/view',  'id' => $item['id'] ] ); ?>"
                            title="<?= $item['title']; ?>">
                             <img src="<?= '/uploads/manufacturer/' . $item['image']; ?>"
                                  alt="<?= $item['title']; ?>"></a></li>

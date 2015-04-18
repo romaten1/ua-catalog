@@ -41,7 +41,7 @@ class StaticPageSearch extends StaticPage
      */
     public function search($params)
     {
-        $query = StaticPage::find();
+        $query = StaticPage::find()->published();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

@@ -10,31 +10,12 @@ $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Shops'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="shop-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <section class="blog-content">
+            <div class="wrapper">
+                <h1><?= Html::encode( $this->title ) ?></h1>
+                <?= 'м' . $model->sity . ' - ' .  $model->address?> <br />
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
+            </div>
+    </section>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'title',
-            'sity',
-            'address',
-            'created_at',
-            'updated_at',
-        ],
-    ]) ?>
-
-</div>

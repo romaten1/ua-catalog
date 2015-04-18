@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\models\query\StaticQuery;
 use app\modules\admin\models\StaticLang;
 use Yii;
 use yii\behaviors\TimestampBehavior;
@@ -19,9 +20,9 @@ use yii\helpers\ArrayHelper;
  */
 class StaticPage extends Root
 {
-    const TYPE_ABOUT = 0;
-    const TYPE_MANUFACTURER = 1;
-    const TYPE_USER = 2;
+    const TYPE_ABOUT = 1;
+    const TYPE_MANUFACTURER = 2;
+    const TYPE_USER = 3;
 
     /**
      * @inheritdoc
@@ -31,6 +32,14 @@ class StaticPage extends Root
         return [
             TimestampBehavior::className(),
         ];
+    }
+
+    /**
+     * @return StaticQuery|\yii\db\ActiveQuery
+     */
+    public static function find()
+    {
+        return new StaticQuery(get_called_class());
     }
     /**
      * @inheritdoc
@@ -104,12 +113,12 @@ class StaticPage extends Root
      */
     public function getTypeLabel()
     {
-        $types = $this->getStatusArray();
+        $types = $this->getTypeArray();
         if($this->type == self::TYPE_USER ){
             $return = '<span class="label label-success">'.ArrayHelper::getValue($types, $this->type).'</span>';
         }
         elseif($this->type == self::TYPE_MANUFACTURER) {
-            $return = '<span class="label label-warning">'.ArrayHelper::getValue($types, $this->type).'</span>';
+            $return = '<span class="label label-primary">'.ArrayHelper::getValue($types, $this->type).'</span>';
         }
         else {
             $return = '<span class="label label-info">'.ArrayHelper::getValue($types, $this->type).'</span>';

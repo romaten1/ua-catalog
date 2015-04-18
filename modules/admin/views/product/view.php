@@ -1,5 +1,6 @@
 <?php
 
+use app\models\CategoryThird;
 use app\models\Manufacturer;
 use app\models\Product;
 use yii\helpers\Html;
@@ -37,6 +38,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             'price',
             'category_id',
+            [
+                'attribute' => 'category_id',
+                'value'     => CategoryThird::getFullCategory($model->category_id),
+                'format'    => 'html'
+            ],
             [
                 'attribute' => 'manufacturer_id',
                 'value'     => Manufacturer::findOne(['id' => $model->manufacturer_id])->title,

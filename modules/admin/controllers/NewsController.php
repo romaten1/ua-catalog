@@ -3,9 +3,9 @@
 namespace app\modules\admin\controllers;
 
 use app\helpers\FileHelper;
+use app\modules\admin\models\search\NewsSearch;
 use Yii;
 use app\models\News;
-use app\models\search\NewsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
