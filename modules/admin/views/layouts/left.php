@@ -77,7 +77,7 @@ use yii\helpers\Url;
                     <li><a href="<?= Url::toRoute('/admin/category/category')?>"><i class="fa fa-angle-double-right"></i>Основні категорії</a></li>
                     <li><a href="<?= Url::toRoute('/admin/category/category-second')?>"><i class="fa fa-angle-double-right"></i>Категорії другого рівня</a></li>
                     <li><a href="<?= Url::toRoute('/admin/category/category-third')?>"><i class="fa fa-angle-double-right"></i>Категорії третього рівня</a></li>
-                    
+
                 </ul>
             </li>
             <li>
