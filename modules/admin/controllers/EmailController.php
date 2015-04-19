@@ -3,9 +3,9 @@
 namespace app\modules\admin\controllers;
 
 use app\models\ContactForm;
+use app\modules\admin\models\search\EmailSearch;
 use Yii;
 use app\models\Email;
-use app\modules\admin\models\EmailSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -143,11 +143,6 @@ class EmailController extends Controller
     }
 
     public function actionUnsubscribe()
-    {
-
-    }
-
-    public function actionValidateToken()
     {
 
     }

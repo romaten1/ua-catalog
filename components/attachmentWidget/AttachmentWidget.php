@@ -7,7 +7,8 @@ use Yii;
 use yii\base\Widget;
 
 /**
- * Class CategoryWidget
+ * Виводяться додаткові фото для продукту на сторінці продукту
+ *
  * @package app\components\categoryWidget
  */
 class AttachmentWidget extends Widget

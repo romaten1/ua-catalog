@@ -1,4 +1,7 @@
 <?php
+use app\models\CategoryThird;
+use app\models\Product;
+use kartik\slider\Slider;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ListView;
@@ -7,13 +10,16 @@ use yii\widgets\ListView;
 ?>
 
 
-    <div class="katalog-head">
+<div class="katalog-head">
     <div class="wrapper">
         <span><?= $title; ?></span>
-        <form action="<?= Url::to( [ '/product'] ); ?>" method="get">
-        <label>
+
+        <form action="<?= Url::current(); ?>" method="get">
+            <input type="hidden" name="id" value="<?= Yii::$app->request->queryParams['id']; ?>"/>
+            <label>
                 Сортувати за:
                 <select name="filter" id="filter">
+                    <option value="">Вибрати</option>
                     <option value="date">Датою оновлення - від найновіших</option>
                     <option value="price-up">Ціною - спочатку найдешевші</option>
                     <option value="price-down">Ціною - спочатку найдорожчі</option>
@@ -22,52 +28,73 @@ use yii\widgets\ListView;
             <label>
                 Обрати регіон:
                 <select name="region" id="region">
-                    <?php foreach($region as $sity){
+                    '<option value="all">Всі</option>';
+                    <?php foreach ($region as $sity) {
                         echo '<option value="' . $sity . '">' . $sity . '</option>';
                     }?>
                 </select>
             </label>
-            <?= Html::submitButton('Застосувати', ['class' => 'btn btn-default', 'name' => 'contact-button']) ?>
+            <?= Html::submitButton( 'Застосувати', [ 'class' => 'btn btn-default', 'name' => 'contact-button' ] ) ?>
 
-    </form>
+        </form>
     </div>
 </div>
 <div class="wrapper clearfix">
     <div class="filter">
-        <form action="<?= Url::to( [ '/product'] ); ?>" method="get">
-        <div class="type-of-product">
-            <a href="#" title="Тип" class="active">Тип</a>
-            <ul id="type-of-product" class="open">
-                <li><label><input type="checkbox" name="costum"> Костюми</label></li>
-                <li><label><input type="checkbox" name="costum1"> Піджаки</label></li>
-                <li><label><input type="checkbox" name="costum2"> Светри і гольфи</label></li>
-                <li><label><input type="checkbox" name="costum3"> Плаття</label></li>
-                <li><label><input type="checkbox" name="costum4"> Спідниці</label></li>
-                <li><label><input type="checkbox" name="costum5"> Брюки</label></li>
-                <li><label><input type="checkbox" name="costum6"> Блузи</label></li>
-                <li><label><input type="checkbox" name="costum7"> Білизна</label></li>
-                <li><label><input type="checkbox" name="costum8"> Спортивний одяг</label></li>
-            </ul>
-        </div>
-        <div class="price-range"><span>Ціновий діапазон</span>
-
-            <div class="main-line">
-                <div class="variable-line">
-                    <span class="low-price">550</span>
-                    <span class="high-price">7580</span>
+        <form action="<?= Url::current(); ?>" method="get">
+            <input type="hidden" name="id" value="<?= Yii::$app->request->queryParams['id']; ?>"/>
+            <?php if ($category_type == 'second') {
+                $items = CategoryThird::find()->where( [ 'parent_id' => $category_id ] )->all();
+                ?>
+                <div class="type-of-product">
+                    <a href="#" title="Тип" class="active">Тип</a>
+                    <ul id="type-of-product" class="open">
+                        <?php foreach ($items as $item) { ?>
+                            <li><label><input type="checkbox"
+                                              name="categoryThird[<?= $item->id ?>]"> <?= $item->title ?></label></li>
+                        <?php } ?>
+                    </ul>
                 </div>
+            <?php }
+            $isFrontpage = false;
+            if ((Yii::$app->controller->id.'/'.\Yii::$app->controller->action->id) != 'site/index'  ) {
+                $isFrontpage = true;
+            }
+            if($isFrontpage) {
+                ?>
+
+                <div class="price-range"><span>Ціновий діапазон</span>
+                </div>
+                <?php
+                echo Slider::widget( [
+                    'name'          => 'price',
+                    'value'         => '0,' . Product::getMaxPrice(),
+                    'sliderColor'   => Slider::TYPE_GREY,
+                    'pluginOptions' => [
+                        'min'   => 0,
+                        'max'   => Product::getMaxPrice(),
+                        'step'  => 10,
+                        'range' => true
+                    ],
+                ] );
+            }
+            ?>
+
+
+            <?php if ($category_type == 'third') {
+            $items = CategoryThird::getManufacturers($category_id);
+            ?>
+            <div class="brand">
+                <a href="#" title="Бренд">Бренд</a>
+                <ul id="brand">
+                    <?php foreach ($items as $item) { ?>
+                        <li><label><input type="checkbox" name="manufacturer[<?= $item->id ?>]"> <?= $item->title ?></label></li>
+                    <?php } ?>
+                </ul>
             </div>
-        </div>
-        <div class="brand">
-            <a href="#" title="Бренд">Бренд</a>
-            <ul id="brand">
-                <li><label><input type="checkbox" name="brand1"> brand1</label></li>
-                <li><label><input type="checkbox" name="brand2"> brand2</label></li>
-                <li><label><input type="checkbox" name="brand3"> brand3</label></li>
-            </ul>
-        </div>
+            <?php } ?>
             <div class="form-group">
-                <?= Html::submitButton('Застосувати', ['class' => 'btn btn-default', 'name' => 'contact-button']) ?>
+                <?= Html::submitButton( 'Застосувати', [ 'class' => 'btn btn-default', 'name' => 'contact-button' ] ) ?>
             </div>
         </form>
     </div>

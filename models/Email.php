@@ -65,4 +65,39 @@ class Email extends ActiveRecord
             'time_token' => Yii::t('app', 'Час запиту на видалення з підписки'),
         ];
     }
+
+
+    /**
+     * @param $email_id
+     * @param $hash
+     *
+     * @throws \Exception
+     * @throws \yii\base\InvalidConfigException
+     */
+    public function validateToken($email_id, $hash)
+    {
+        $model = Email::find($email_id)->one();
+
+        if (Yii::$app->getSecurity()->validatePassword($model->email . 'salt', $hash)) {
+            $model->delete();
+        }
+    }
+
+    /**
+     * @param $email_id
+     *
+     * @throws \yii\base\Exception
+     * @throws \yii\base\InvalidConfigException
+     * @internal param $email
+     *
+     */
+    public function createToken($email_id)
+    {
+        $model = Email::find($email_id)->one();
+
+        $model->token = Yii::$app->getSecurity()->generatePasswordHash($model->email . 'salt');
+
+        $model->save();
+
+    }
 }

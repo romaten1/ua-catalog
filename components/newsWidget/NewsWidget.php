@@ -9,7 +9,9 @@ use yii\base\Widget;
 use yii\data\ActiveDataProvider;
 
 /**
- * Class CategoryWidget
+ *
+ * відображення останніх новин в футері
+ *
  * @package app\components\categoryWidget
  */
 class NewsWidget extends Widget

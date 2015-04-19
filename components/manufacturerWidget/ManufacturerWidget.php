@@ -6,7 +6,8 @@ use Yii;
 use yii\base\Widget;
 
 /**
- * Class CategoryWidget
+ * Відображення кількох логотипів виробників в футері
+ *
  * @package app\components\categoryWidget
  */
 class ManufacturerWidget extends Widget

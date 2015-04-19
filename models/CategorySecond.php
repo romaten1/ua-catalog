@@ -6,6 +6,7 @@ use app\modules\admin\modules\category\models\CategorySecondLang;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\helpers\Html;
 use yii\helpers\VarDumper;
 
 /**
@@ -106,6 +107,35 @@ class CategorySecond extends ActiveRecord
             $result = $this->hasOne(CategorySecondLang::className(), ['category_id' => 'id'])->where('lang_id = :lang_id', [':lang_id' => $lang_id]);
         }
         return $result;
+    }
+
+    /**
+     * @param $category_id
+     *
+     * @return array
+     */
+    public static function getProductIds( $category_id )
+    {
+        $third = CategoryThird::find()->where(['parent_id' => $category_id])->all();
+        //VarDumper::dump( $third ); die();
+        $array_id  =[];
+        foreach($third as $item){
+            $array_id  = array_merge($array_id, CategoryThird::getProductIds($item->id));
+        }
+        return array_unique($array_id);
+    }
+
+    /**
+     * @param $category_id
+     *
+     * @return array
+     */
+    public static function getBreadcrumbs($category_id)
+    {
+        $category = self::findOne($category_id);
+        $first = Category::findOne($category->parent_id);
+        return Html::a($first->title, ['/category/view', 'id'=>$first->id]) . ' / ' .
+               $category->title;
     }
 
 }

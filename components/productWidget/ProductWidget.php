@@ -9,7 +9,13 @@ use yii\base\Widget;
 use yii\data\ActiveDataProvider;
 
 /**
- * Class CategoryWidget
+ *
+ * Основний клас для відображення і пошуку продуктів - використовується на головній сторінці та сторінках категорій
+ *
+ * Вміщує віджет фільтрування та категорій
+ *
+ * Пошук відбувається через окрему модель ProductCategorySearch() - в які реалізована логіка пошуку
+ *
  * @package app\components\categoryWidget
  */
 class ProductWidget extends Widget
@@ -31,7 +37,6 @@ class ProductWidget extends Widget
     {
         $searchModel = new ProductCategorySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $this->category_id, $this->type_category);
-
         return $this->render('product', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

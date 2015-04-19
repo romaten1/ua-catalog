@@ -2,12 +2,12 @@
 
 namespace app\controllers;
 
-use app\modules\admin\models\search\EmailSearch;
+
 use Yii;
 use app\models\Email;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * EmailController implements the CRUD actions for Email model.
@@ -22,14 +22,14 @@ class EmailController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Email();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $model = new Email();
+        $model->email = Yii::$app->request->queryParams['email'];
+        if ($model->save() ) {
+
+            return $this->goHome();
         } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+            return $this->goHome();
         }
     }
 

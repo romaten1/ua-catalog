@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Collection;
 use app\models\search\CollectionSearch;
+use yii\filters\AccessControl;
 use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -18,27 +19,28 @@ class CollectionController extends Controller
     public function behaviors()
     {
         return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index', 'create', 'delete'],
+                        'roles' => ['@'],
+                    ]
                 ],
             ],
         ];
     }
-
     /**
      * Lists all Collection models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new CollectionSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $model = Collection::find()->where(['user_id' => Yii::$app->user->id])->all();
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'model' => $model,
         ]);
     }
 
@@ -52,32 +54,17 @@ class CollectionController extends Controller
         $model = new Collection();
         $model->product_id = Yii::$app->request->queryParams['id'];
         $model->user_id = Yii::$app->user->id;
+        $product_is = Collection::find()->where(['user_id' => $model->user_id, 'product_id' => $model->product_id ])->all();
+        if($product_is){
+            return $this->redirect(Yii::$app->request->referrer);
+        }
         if ($model->save()) {
-
             return $this->redirect(Yii::$app->request->referrer);
         } else {
             return $this->redirect(Yii::$app->request->referrer );
         }
     }
 
-    /**
-     * Updates an existing Collection model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
-    }
 
     /**
      * Deletes an existing Collection model.
@@ -87,8 +74,11 @@ class CollectionController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
 
+        $model = $this->findModel($id);
+        if($model->user_id == Yii::$app->user->id){
+            $model->delete();
+        }
         return $this->redirect(['index']);
     }
 

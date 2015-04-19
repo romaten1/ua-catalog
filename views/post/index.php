@@ -1,7 +1,7 @@
 <?php
 
+use app\components\search2Widget\Search2Widget;
 use yii\helpers\Html;
-use yii\widgets\ListView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\Postsearch */
@@ -21,4 +21,5 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 </section>
+<?php echo Search2Widget::widget(); ?>
 

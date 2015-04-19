@@ -11,7 +11,8 @@ use yii\data\ActiveDataProvider;
 use yii\db\Query;
 
 /**
- * Class CategoryWidget
+ * Виводить статичні сторінки задежно від категорії в футері
+ *
  * @package app\components\categoryWidget
  */
 class StaticWidget extends Widget

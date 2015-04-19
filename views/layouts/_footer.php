@@ -55,8 +55,8 @@ use yii\helpers\Url;
                     </ul>
                     <span class="good-news">Ми приносимо ТІЛЬКИ ДОБРІ НОВИНИ</span>
                     <span class="good-news-rss">Підпишись та дізнавайся першим</span>
-                    <form action="index.php" method="get">
-                        <input type="text" name="Email" placeholder="Email">
+                    <form action="/uk/web/email/create" method="get">
+                        <input type="text" name="email" placeholder="Email*">
                         <input type="submit" name="submit" value="Підписатись">
                     </form>
                 </div>

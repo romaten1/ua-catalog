@@ -24,13 +24,14 @@ class Category extends ActiveRecord
     {
         return [
             'timestampBehavior' => [
-                'class' => TimestampBehavior::className(),
+                'class'      => TimestampBehavior::className(),
                 'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at'],
+                    ActiveRecord::EVENT_BEFORE_INSERT => [ 'created_at' ],
                 ]
             ],
         ];
     }
+
     /**
      * @inheritdoc
      */
@@ -45,10 +46,10 @@ class Category extends ActiveRecord
     public function rules()
     {
         return [
-            [['title'], 'required'],
-            [['created_at'], 'integer'],
-            [['title'], 'string', 'max' => 255],
-            [['class'], 'string', 'max' => 100]
+            [ [ 'title' ], 'required' ],
+            [ [ 'created_at' ], 'integer' ],
+            [ [ 'title' ], 'string', 'max' => 255 ],
+            [ [ 'class' ], 'string', 'max' => 100 ]
         ];
     }
 
@@ -58,10 +59,10 @@ class Category extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'title' => Yii::t('app', 'Title'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'class' => Yii::t('app', 'Class'),
+            'id'         => Yii::t( 'app', 'ID' ),
+            'title'      => Yii::t( 'app', 'Title' ),
+            'created_at' => Yii::t( 'app', 'Created At' ),
+            'class'      => Yii::t( 'app', 'Class' ),
         ];
     }
 
@@ -72,30 +73,60 @@ class Category extends ActiveRecord
     {
         $product = new self;
         $product = $product->find()->asArray()->all();
-        $titles = [];
-        foreach($product as $item){
+        $titles  = [ ];
+        foreach ($product as $item) {
             $titles[$item['id']] = $item['title'];
         }
-        return array_unique($titles);
+        return array_unique( $titles );
     }
+
     /**
      * @param null $lang_id
      *
      * @return static
      */
-    public function getContent($lang_id = null)
+    public function getContent( $lang_id = null )
     {
-        $lang_id = ($lang_id === null)? Lang::getCurrent()->id : $lang_id;
+        $lang_id = ( $lang_id === null ) ? Lang::getCurrent()->id : $lang_id;
         // Для перевірки наявності перекладу поточною мовою
-        $is_translate = CategoryLang::find()->where(['category_id' => $this->id, 'lang_id' => $lang_id ])->one();
+        $is_translate = CategoryLang::find()->where( [ 'category_id' => $this->id, 'lang_id' => $lang_id ] )->one();
         // Якщо немає перекладу для поточної мови - отримуємо дані для мови, встановленої по замовчуванню
-        if(!$is_translate){
-            $result = $this->hasOne(CategoryLang::className(), ['category_id' => 'id'])->where('lang_id = :lang_id', [':lang_id' => Lang::getDefaultLang()->id]);
-        }else{
+        if ( ! $is_translate) {
+            $result = $this->hasOne( CategoryLang::className(),
+                [ 'category_id' => 'id' ] )->where( 'lang_id = :lang_id',
+                [ ':lang_id' => Lang::getDefaultLang()->id ] );
+        } else {
             // Якщо є переклад - виводимо його
-            $result = $this->hasOne(CategoryLang::className(), ['category_id' => 'id'])->where('lang_id = :lang_id', [':lang_id' => $lang_id]);
+            $result = $this->hasOne( CategoryLang::className(),
+                [ 'category_id' => 'id' ] )->where( 'lang_id = :lang_id', [ ':lang_id' => $lang_id ] );
         }
         return $result;
+    }
+
+    /**
+     * @param $category_id
+     *
+     * @return array
+     */
+    public static function getProductIds( $category_id )
+    {
+        $second = CategorySecond::find()->where( [ 'parent_id' => $category_id ] )->all();
+        //VarDumper::dump( $third ); die();
+        $array_id = [ ];
+        foreach ($second as $item) {
+            $array_id = array_merge( $array_id, CategorySecond::getProductIds( $item->id ) );
+        }
+        return array_unique( $array_id );
+    }
+
+    /**
+     * @param $category_id
+     *
+     * @return array
+     */
+    public static function getBreadcrumbs($category_id)
+    {
+        return self::findOne($category_id)->title;
     }
 
 

@@ -12,21 +12,17 @@ $this->title = Yii::t('app', 'Products');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<div class="katalog">
-    <?php echo FilterWidget::widget(); ?>
+<section class="blog-content">
+    <div class="wrapper clearfix">
+        <div class="katalog">
+        <h1><?= Html::encode($this->title) ?></h1>
 
-    <div class="katalog-content">
-        <div class="breadcrumbs">
-            <a href="#" title="Одяг">Одяг</a> >
-            <a href="#" title="Жіночий одяг">Жіночий одяг</a>
-        </div>
         <?= ListView::widget([
             'dataProvider' => $dataProvider,
-            'layout' => '{items}{paginator}',
-            'itemOptions' => ['class' => 'katalog-content-item'],
+            'options' => ['class' => 'katalog-content'],
+            'itemOptions' => ['class' => 'type-of-product'],
             'itemView' => '_listItem',
         ]) ?>
-
+        </div>
     </div>
-  </div>
-</div>
+</section>

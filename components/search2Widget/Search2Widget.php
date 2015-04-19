@@ -1,5 +1,5 @@
 <?php
-namespace app\components\searchWidget;
+namespace app\components\search2Widget;
 
 use app\models\Manufacturer;
 use app\models\Product;
@@ -10,7 +10,7 @@ use yii\base\Widget;
  * Class CategoryWidget
  * @package app\components\categoryWidget
  */
-class SearchWidget extends Widget
+class Search2Widget extends Widget
 {
     public function init()
     {
@@ -22,8 +22,7 @@ class SearchWidget extends Widget
      */
     public function run()
     {
-        return $this->render('search', [
-
+        return $this->render('search2', [
         ]);
     }
 }

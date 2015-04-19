@@ -4,8 +4,10 @@ namespace app\models;
 
 use app\models\query\ProductQuery;
 use app\modules\admin\models\ProductLang;
+use app\modules\admin\models\ShopProduct;
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "product".
@@ -57,7 +59,7 @@ class Product extends Root
             [['title', 'price', 'category_id', 'manufacturer_id', 'status'], 'required'],
             [['price'], 'number'],
             [['category_id', 'manufacturer_id', 'updated_at', 'created_at', 'status'], 'integer'],
-            [['title', 'image'], 'string', 'max' => 255]
+            [['title', 'image'], 'string', 'max' => 255],
         ];
     }
 
@@ -120,4 +122,22 @@ class Product extends Root
         }
         return $titles;
     }
+
+    /**
+     * @return array
+     */
+    public static function getMaxPrice()
+    {
+        $max = max(ArrayHelper::map(Product::find()->all(), 'id', 'price'));
+        return $max;
+    }
+
+    public function getShop()
+    {
+        return $this->hasMany(Shop::className(), ['id' => 'shop_id'])
+                    ->viaTable(ShopProduct::tableName(), ['product_id' => 'id']);
+    }
+
+
+
 }

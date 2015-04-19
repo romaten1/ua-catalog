@@ -10,7 +10,9 @@ use Yii;
 use yii\base\Widget;
 
 /**
- * Class CategoryWidget
+ *
+ * Виводтися код для випадаючого дерева категорій при наведенні на логотип сайту
+ *
  * @package app\components\categoryWidget
  */
 class CategoryWidget extends Widget
@@ -25,18 +27,15 @@ class CategoryWidget extends Widget
      */
     public function run()
     {
-        //$category = CategoryThird::find()->all();
         $category_main = Category::find()->asArray()->all();
         $category_second = CategorySecond::find()->asArray()->all();
         $category_third = CategoryThird::find()->asArray()->all();
         $manufacturers = Manufacturer::find()->asArray()->all();
-        $category_manufacturer = CategoryThirdManufacturer::find()->asArray()->all();
         return $this->render('category', [
             'category_main' => $category_main,
             'category_second' => $category_second,
             'category_third' => $category_third,
             'manufacturers' => $manufacturers,
-            'category_manufacturer' => $category_manufacturer
         ]);
     }
 }

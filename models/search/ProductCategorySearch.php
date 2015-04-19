@@ -2,11 +2,14 @@
 
 namespace app\models\search;
 
+use app\models\Category;
+use app\models\CategorySecond;
 use app\models\CategoryThird;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Product;
+use yii\helpers\VarDumper;
 
 /**
  * ProductSearch represents the model behind the search form about `app\models\Product`.
@@ -39,11 +42,13 @@ class ProductCategorySearch extends Product
      * @param $category_id
      * @param $type_category
      *
+     * @internal param null $manufacturer
+     *
      * @internal param $category
      *
      * @return ActiveDataProvider
      */
-    public function search( $params, $category_id, $type_category )
+    public function search( $params, $category_id, $type_category = null)
     {
         $order_array = [ ];
         if (isset( Yii::$app->request->queryParams['filter'] )) {
@@ -64,10 +69,36 @@ class ProductCategorySearch extends Product
         }
 
         $query = Product::find()->published();
+
+        if (isset( $type_category )) {
+            switch ($type_category) {
+                case 'second':
+                    $ids = CategorySecond::getProductIds($category_id);
+                    //VarDumper::dump( $ids ); die();
+                    $query->andWhere( [ 'id' => $ids ] );
+                    break;
+                case 'first':
+                    $ids = Category::getProductIds($category_id);
+                    $query->andWhere( [ 'id' => $ids ] );
+                    break;
+                case 'third':
+                    $ids = CategoryThird::getProductIds($category_id);
+                    $query->andWhere( [ 'id' => $ids ] );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+
+
         $query->orderBy( $order_array );
         $dataProvider = new ActiveDataProvider( [
             'query' => $query,
+            'pagination'=> ['defaultPageSize' => 9]
         ] );
+
+
 
         $this->load( $params );
 
@@ -78,19 +109,27 @@ class ProductCategorySearch extends Product
         }
 
         $query->andFilterWhere( [
-            'category_id'     => $category_id,
-            'manufacturer_id' => $this->manufacturer_id,
+            //'category_id'     => $category_id,
+            //'manufacturer_id' => $this->manufacturer_id,
             'created_at'      => $this->created_at,
         ] );
-        if ($type_category == 'second') {
-            $array = CategoryThird::find()->where(['parent_id' => $category_id])->asArray()->all();
-            foreach($array as $item){
-                $query->andFilterWhere( [ 'category_id' => $item['id'] ] );
-            }
-
+        $price = Yii::$app->request->queryParams['price'];
+        //VarDumper::dump($price); die();
+        if ($price) {
+            $price = explode(',', $price);
+            $query->andWhere(['between', 'price', $price[0], $price[1]]);
         }
-        if (Yii::$app->request->queryParams['filter']) {
 
+        $type = Yii::$app->request->queryParams['categoryThird'];
+        if ($type) {
+            $query->andWhere(['in', 'category_id', array_keys($type)]);
+        }
+
+        $manufacturer = Yii::$app->request->queryParams['manufacturer'];
+        if (is_array($manufacturer)) {
+            $query->andWhere(['in', 'manufacturer_id', array_keys($manufacturer)]);
+        }elseif($manufacturer){
+            $query->andWhere(['manufacturer_id' => $manufacturer]);
         }
         $query->andFilterWhere( [ 'like', 'title', $this->title ] )
               ->andFilterWhere( [ 'like', 'image', $this->image ] );

@@ -10,7 +10,11 @@ use Yii;
 use yii\base\Widget;
 
 /**
- * Class CategoryWidget
+ *
+ * Віджет з можливістю вибору категорій продуктів - з випадаючими меню
+ *
+ * Відображається у віджеті Продуктів *
+ *
  * @package app\components\categoryWidget
  */
 class MainCategoryWidget extends Widget

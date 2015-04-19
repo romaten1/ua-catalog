@@ -2,6 +2,7 @@
 
 use app\components\attachmentWidget\AttachmentWidget;
 use app\components\manProductWidget\ManProductWidget;
+use app\models\CategoryThird;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\DetailView;
@@ -10,16 +11,12 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Product */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Products'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <section class="product-page">
     <div class="wrapper">
         <div class="breadcrumbs">
-            <a href="#" title="Одяг">Одяг</a> >
-            <a href="#" title="Жіночий одяг">Жіночий одяг</a> >
-            <a href="#" title="Отаман"> Отаман</a> >
-            <a href="#" title="Вишиванка батистова з поясом">Вишиванка батистова з поясом</a>
+            <?= CategoryThird::getBreadcrumbs($model->category_id)  ?>
         </div>
         <div class="clearfix">
             <div class="product-large-foto">
@@ -37,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="product-info">
                 <h1><?= $model->content->title ?></h1>
                 <h3>Виробник: <a href="<?= Url::to( [ '/manufacturer/view', 'id' => $model->manufacturer->id] ); ?>" title="<?= $model->manufacturer->title ?>"><?= $model->manufacturer->title ?></a></h3>
-                <h3>Категорія: <a href="#" title="Жіночий одяг. Блузи">Жіночий одяг. Блузи</a></h3>
+                <h3>Категорія: <a href="<?= Url::to( [ '/category-third/view', 'id' => $model->category_id] ); ?>" title=""><?= CategoryThird::getFullCategory($model->category_id) ?></a></h3>
                 <ul class="social-list">
                     <li><a href="#" title="fb" class="fb"> </a></li><!--
 		    		--><li><a href="#" title="vk" class="vk"> </a></li><!--
@@ -58,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 </ul>
             </div>
         </div>
-        <div class="such-brand-head">Інші товари виробника <?= $model->manufacturer->content->title ?></div>
+        <div class="such-brand-head">Товари виробника <?= $model->manufacturer->content->title ?></div>
         <div class="such-brand">
             <?= ManProductWidget::Widget(['manufacturer_id' => $model->manufacturer_id]) ?>
         </div>

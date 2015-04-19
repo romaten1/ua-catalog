@@ -7,7 +7,6 @@ use yii\widgets\DetailView;
 /* @var $model app\models\StaticPage */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Static Pages'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <section class="blog-content">

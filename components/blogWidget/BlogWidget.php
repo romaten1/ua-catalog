@@ -10,7 +10,9 @@ use yii\base\Widget;
 use yii\data\ActiveDataProvider;
 
 /**
- * Class CategoryWidget
+ *
+ * Виводяться три останні записи блогу на головній сторінці сайту в слайдері над футером
+ *
  * @package app\components\categoryWidget
  */
 class BlogWidget extends Widget

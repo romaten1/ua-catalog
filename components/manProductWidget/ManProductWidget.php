@@ -8,7 +8,9 @@ use yii\base\Widget;
 use yii\data\ActiveDataProvider;
 
 /**
- * Class CategoryWidget
+ *
+ * Відображаються продукти, які відносяться до одного виробника
+ *
  * @package app\components\categoryWidget
  */
 class ManProductWidget extends Widget

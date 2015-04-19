@@ -908,7 +908,7 @@ p.UA-brand-head {
 .filter .brand ul, .filter .type-of-product ul {
 	margin-top: 25px;
 	margin-left: 5px;
-	display: none
+	/*display: none*/
 }
 
 .filter .brand ul.open, .filter .type-of-product ul.open {
@@ -1093,7 +1093,7 @@ a.button-fav {
 	margin-left: 86px
 }
 
-.paginator a, .paginator span {
+.paginator li, .paginator span {
 	display: inline-block;
 	text-decoration: none;
 	vertical-align: middle;
