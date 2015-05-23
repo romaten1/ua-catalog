@@ -25,10 +25,11 @@ use yii\widgets\ListView;
                     'date' => 'Датою оновлення - від найновіших',
                     'price-up' => 'Ціною - спочатку найдешевші',
                     'price-down' => 'Ціною - спочатку найдорожчі',
-                ];
-                foreach($options as $key => $value){
-                ?>
-                    <option value="<?= $key; ?>"><?= $value; ?></option>
+                    ];
+                    foreach($options as $key => $value){
+                    ?>
+                    <option value="<?= $key; ?>"
+                        <? if(Yii::$app->request->queryParams['filter'] == $key) echo 'selected'; ?> ><?= $value; ?></option>
                     <?php } ?>
                 </select>
             </label>
@@ -37,7 +38,9 @@ use yii\widgets\ListView;
                 <select name="region" id="region">
                 '<option value="all">Всі</option>';
                 <?php foreach ($region as $sity) {
-                    echo '<option value="' . $sity . '">' . $sity . '</option>';
+                    $selected = '';
+                    if(Yii::$app->request->queryParams['region'] == $sity) $selected = 'selected';
+                    echo '<option ' . $selected . ' value="' . $sity . '">' . $sity . '</option>';
                 }?>
             </select>
             </label>
@@ -56,8 +59,11 @@ use yii\widgets\ListView;
                 <div class="type-of-product">
                     <a href="#" title="Тип" class="active">Тип</a>
                     <ul id="type-of-product" class="open">
-                        <?php foreach ($items as $item) { ?>
-                            <li><label><input type="checkbox"
+                        <?php foreach ($items as $item) {
+                            $checked = '';
+                            if(Yii::$app->request->queryParams['categoryThird'][$item->id] == 'on') $checked = 'checked="checked"';
+                            ?>
+                            <li><label><input type="checkbox" <?= $checked ?>
                                               name="categoryThird[<?= $item->id ?>]"> <?= $item->title ?></label></li>
                         <?php } ?>
                     </ul>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3306
--- Час створення: Квт 19 2015 р., 22:49
+-- Час створення: Трв 23 2015 р., 17:45
 -- Версія сервера: 5.5.41-log
 -- Версія PHP: 5.4.35
 
@@ -657,8 +657,8 @@ CREATE TABLE IF NOT EXISTS `shop` (
 --
 
 INSERT INTO `shop` (`id`, `title`, `sity`, `address`, `created_at`, `updated_at`) VALUES
-(1, 'Магазин', 'Умань', 'вул. Уманська 1', 1429211587, 1429211587),
-(2, 'Магазин 2', 'Умань', 'вул. Уманська 2', 1429212840, 1429212840),
+(1, 'Магазин', 'Умань1', 'вул. Уманська 1', 1429211587, 1429211587),
+(2, 'Магазин 2', 'Умань2', 'вул. Уманська 2', 1429212840, 1429212840),
 (3, 'Магазин 3', 'Київ', 'вул. Київська 1', 1429213477, 1429213477);
 
 -- --------------------------------------------------------
@@ -697,14 +697,16 @@ CREATE TABLE IF NOT EXISTS `slider_up` (
   `image` varchar(255) NOT NULL COMMENT 'Фото',
   `title` int(255) NOT NULL COMMENT 'Назва',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Дамп даних таблиці `slider_up`
 --
 
 INSERT INTO `slider_up` (`id`, `image`, `title`) VALUES
-(1, 'O_YTW_1.jpg', 1);
+(1, 'O_YTW_1.jpg', 1),
+(2, '_7lXu_2.jpg', 2),
+(3, 'UHv3t_3.jpg', 3);
 
 -- --------------------------------------------------------
 

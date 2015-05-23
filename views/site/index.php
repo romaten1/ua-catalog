@@ -12,14 +12,19 @@ $this->title = 'UA каталог';
 ?>
 <div class="container-main">
     <div class="slider" id="slider-image">
-        <div class="slider-content">
-            <div class="slider-content-item">
-                <?php $sliders = SliderUp::find()->asArray()->all();
-                foreach($sliders as $item){
-                    echo Html::img('/uploads/slider-up/' . $item['image']);
+        <?php $sliders = SliderUp::find()->asArray()->all(); ?>
+        <div class="slider-content" style="width:<?php echo count($sliders)*1200+10; ?>px">
+
+                <?php
+                foreach($sliders as $item){ ?>
+                <div class="slider-content-item" >
+                <?php
+                    echo Html::img('/uploads/slider-up/' . $item['image']); ?>
+                </div>
+                <?php
                 }
                 ?>
-            </div>
+
         </div>
         <div class="slider-nav">
             <ul class="switchers">
