@@ -80,6 +80,17 @@ use yii\helpers\Url;
 
                 </ul>
             </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-sitemap"></i>
+                    <span>Мови</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="<?= Url::toRoute('/admin/lang')?>"><i class="fa fa-angle-double-right"></i>Перелік мов</a></li>
+                    <li><a href="<?= Url::toRoute('/admin/lang/create')?>"><i class="fa fa-angle-double-right"></i>Додати мову для перекладу</a></li>
+                </ul>
+            </li>
             <li>
                 <a href="<?= Url::toRoute('/admin/collection')?>">
                     <i class="fa fa-shopping-cart"></i> <span>Колекції користувачів</span>

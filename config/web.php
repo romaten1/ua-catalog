@@ -14,6 +14,7 @@ $config = [
             'class' => 'dektrium\user\Module',
             'enableConfirmation' => false,
             'admins' => ['admin'],
+            //'layout' => '@app/modules/admin/views/layouts/main',
         ],
         'admin' => [
             'class' => 'app\modules\admin\Module',

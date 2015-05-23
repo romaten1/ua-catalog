@@ -19,7 +19,7 @@ use yii\helpers\Url;
                     <ul>
                     <?= StaticWidget::Widget(['type' => StaticPage::TYPE_ABOUT]) ?>
                     </ul>
-                    <span class="social-head">бУДЬТЕ НА ЗВ’ЯЗКУ</span>
+                    <span class="social-head">БУДЬТЕ НА ЗВ’ЯЗКУ</span>
                     <ul class="social-list">
                         <li><a href="#" title="" class="fb"> </a></li><!--
     			    		--><li><a href="#" title="" class="vk"> </a></li><!--

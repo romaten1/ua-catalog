@@ -11,6 +11,7 @@ if (Yii::$app->controller->action->id === 'login') {
 } else {
     dmstr\web\AdminLteAsset::register($this);
     \app\assets\AppAsset::register($this);
+    \app\assets\AdminAsset::register($this);
     $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@bower') . '/admin-lte';
     ?>
     <?php $this->beginPage() ?>

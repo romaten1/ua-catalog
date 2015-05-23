@@ -3,7 +3,9 @@
 namespace app\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "lang".
@@ -64,12 +66,12 @@ class Lang extends ActiveRecord
     {
         return [
             'id'          => Yii::t( 'app', 'ID' ),
-            'url'         => Yii::t( 'app', 'Url' ),
-            'local'       => Yii::t( 'app', 'Local' ),
-            'name'        => Yii::t( 'app', 'Name' ),
-            'default'     => Yii::t( 'app', 'Default' ),
-            'date_update' => Yii::t( 'app', 'Date Update' ),
-            'date_create' => Yii::t( 'app', 'Date Create' ),
+            'url'         => Yii::t( 'app', 'Як відображається в стрічці пошуку' ),
+            'local'       => Yii::t( 'app', 'Локаль' ),
+            'name'        => Yii::t( 'app', 'Назва' ),
+            'default'     => Yii::t( 'app', 'Основна чи другорядна' ),
+            'date_update' => Yii::t( 'app', 'Дата оновлення' ),
+            'date_create' => Yii::t( 'app', 'Дата стоврення' ),
         ];
     }
 
