@@ -1,6 +1,7 @@
 <?php
 
 use app\models\CategoryThird;
+use app\modules\admin\models\Lang;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 

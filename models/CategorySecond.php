@@ -109,6 +109,17 @@ class CategorySecond extends ActiveRecord
         return $result;
     }
 
+    public function getCatTitle( )
+    {
+
+        if ( ! $this->content->title) {
+            $title = $this->title;
+        } else {
+            $title = $this->content->title;
+        }
+        return $title;
+    }
+
     /**
      * @param $category_id
      *

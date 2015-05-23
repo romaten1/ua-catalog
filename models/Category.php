@@ -17,6 +17,7 @@ use yii\db\ActiveRecord;
  */
 class Category extends ActiveRecord
 {
+    public $catTitle;
     /**
      * @inheritdoc
      */
@@ -49,7 +50,8 @@ class Category extends ActiveRecord
             [ [ 'title' ], 'required' ],
             [ [ 'created_at' ], 'integer' ],
             [ [ 'title' ], 'string', 'max' => 255 ],
-            [ [ 'class' ], 'string', 'max' => 100 ]
+            [ [ 'class' ], 'string', 'max' => 100 ],
+            [ [ 'catTitle' ], 'safe' ],
         ];
     }
 
@@ -64,6 +66,12 @@ class Category extends ActiveRecord
             'created_at' => Yii::t( 'app', 'Created At' ),
             'class'      => Yii::t( 'app', 'Class' ),
         ];
+    }
+
+    public function afterFind()
+    {
+        parent::afterFind();
+        $this->title = $this->getCatTitle( );
     }
 
     /**
@@ -102,6 +110,20 @@ class Category extends ActiveRecord
         }
         return $result;
     }
+
+    public function getCatTitle( )
+    {
+
+        if ( ! $this->content->title) {
+            $title = $this->title;
+        } else {
+            $title = $this->content->title;
+        }
+        return $title;
+    }
+
+
+
 
     /**
      * @param $category_id

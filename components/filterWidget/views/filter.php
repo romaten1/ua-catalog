@@ -29,7 +29,7 @@ use yii\widgets\ListView;
                     foreach($options as $key => $value){
                     ?>
                     <option value="<?= $key; ?>"
-                        <? if(Yii::$app->request->queryParams['filter'] == $key) echo 'selected'; ?> ><?= $value; ?></option>
+                        <?php if(Yii::$app->request->queryParams['filter'] == $key) echo 'selected'; ?> ><?= $value; ?></option>
                     <?php } ?>
                 </select>
             </label>

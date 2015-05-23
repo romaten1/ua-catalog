@@ -29,9 +29,9 @@ class MainCategoryWidget extends Widget
      */
     public function run()
     {
-        $category_main = Category::find()->asArray()->all();
-        $category_second = CategorySecond::find()->asArray()->all();
-        $category_third = CategoryThird::find()->asArray()->all();
+        $category_main = Category::find()->all();
+        $category_second = CategorySecond::find()->all();
+        $category_third = CategoryThird::find()->all();
         return $this->render('main-category', [
             'category_main' => $category_main,
             'category_second' => $category_second,
