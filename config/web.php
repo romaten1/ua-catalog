@@ -29,6 +29,9 @@ $config = [
             'class' => 'app\components\LangRequest',
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'MAYJRupSa-qEagLa64Bf5epcw2ZFM0h_',
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ]
         ],
 
         'cache' => [
@@ -64,6 +67,7 @@ $config = [
             'rules'=>[
                 '/' => 'site/index',
                 '<controller:\w+>/<action:\w+>/*'=>'<controller>/<action>',
+                ['class' => 'yii\rest\UrlRule', 'controller' => ['stat', 'category-rest']],
             ]
         ],
         'i18n' => [

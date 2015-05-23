@@ -90,6 +90,22 @@ class Shop extends ActiveRecord
         return $titles;
     }
 
+    /**
+     * @param $sity
+     *
+     * @return array
+     */
+    public static function getShopBySityArray($sity)
+    {
+        $shop = Shop::find()->where(['sity' => $sity ])->all();
+        $result = [];
+        foreach($shop as $item){
+            $result[] = $item->id;
+        }
+        return $result;
+    }
+
+
 
 
 }

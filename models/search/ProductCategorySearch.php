@@ -5,6 +5,7 @@ namespace app\models\search;
 use app\models\Category;
 use app\models\CategorySecond;
 use app\models\CategoryThird;
+use app\models\Shop;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -25,6 +26,7 @@ class ProductCategorySearch extends Product
             [ [ 'id', 'category_id', 'manufacturer_id', 'updated_at', 'created_at', 'status' ], 'integer' ],
             [ [ 'title', 'image' ], 'safe' ],
             [ [ 'price' ], 'number' ],
+            [['shop'], 'safe']
         ];
     }
 
@@ -68,29 +70,34 @@ class ProductCategorySearch extends Product
             }
         }
 
-        $query = Product::find()->published();
+        $query = Product::find()->with(['shop'])->published();
 
         if (isset( $type_category )) {
             switch ($type_category) {
                 case 'second':
                     $ids = CategorySecond::getProductIds($category_id);
                     //VarDumper::dump( $ids ); die();
-                    $query->andWhere( [ 'id' => $ids ] );
+                    $query->andWhere( [ 'product.id' => $ids ] );
                     break;
                 case 'first':
                     $ids = Category::getProductIds($category_id);
-                    $query->andWhere( [ 'id' => $ids ] );
+                    $query->andWhere( [ 'product.id' => $ids ] );
                     break;
                 case 'third':
                     $ids = CategoryThird::getProductIds($category_id);
-                    $query->andWhere( [ 'id' => $ids ] );
+                    $query->andWhere( [ 'product.id' => $ids ] );
                     break;
                 default:
                     break;
             }
         }
-
-
+        $region = Yii::$app->request->queryParams['region'];
+        if (isset( $region ) && $region != 'all') {
+            $shop_id_array = Shop::getShopBySityArray($region);
+            $query->joinWith(['shop' => function ($q) use($shop_id_array) {
+                $q->where(['in', 'shop.id', $shop_id_array]);
+            }]);
+        }
 
         $query->orderBy( $order_array );
         $dataProvider = new ActiveDataProvider( [

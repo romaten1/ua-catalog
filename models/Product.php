@@ -78,6 +78,7 @@ class Product extends Root
             'created_at' => Yii::t('app', 'Створено'),
             'image' => Yii::t('app', 'Фотографія'),
             'status' => Yii::t('app', 'Опубліковано'),
+            'shop' => Yii::t('app', 'Магазини'),
         ];
     }
 
@@ -132,11 +133,16 @@ class Product extends Root
         return $max;
     }
 
+    /**
+     * @return static
+     */
     public function getShop()
     {
         return $this->hasMany(Shop::className(), ['id' => 'shop_id'])
                     ->viaTable(ShopProduct::tableName(), ['product_id' => 'id']);
     }
+
+
 
 
 

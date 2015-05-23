@@ -19,20 +19,27 @@ use yii\widgets\ListView;
             <label>
                 Сортувати за:
                 <select name="filter" id="filter">
-                    <option value="">Вибрати</option>
-                    <option value="date">Датою оновлення - від найновіших</option>
-                    <option value="price-up">Ціною - спочатку найдешевші</option>
-                    <option value="price-down">Ціною - спочатку найдорожчі</option>
+                <?php
+                $options = [
+                    'all' => 'Вибрати',
+                    'date' => 'Датою оновлення - від найновіших',
+                    'price-up' => 'Ціною - спочатку найдешевші',
+                    'price-down' => 'Ціною - спочатку найдорожчі',
+                ];
+                foreach($options as $key => $value){
+                ?>
+                    <option value="<?= $key; ?>"><?= $value; ?></option>
+                    <?php } ?>
                 </select>
             </label>
             <label>
                 Обрати регіон:
                 <select name="region" id="region">
-                    '<option value="all">Всі</option>';
-                    <?php foreach ($region as $sity) {
-                        echo '<option value="' . $sity . '">' . $sity . '</option>';
-                    }?>
-                </select>
+                '<option value="all">Всі</option>';
+                <?php foreach ($region as $sity) {
+                    echo '<option value="' . $sity . '">' . $sity . '</option>';
+                }?>
+            </select>
             </label>
             <?= Html::submitButton( 'Застосувати', [ 'class' => 'btn btn-default', 'name' => 'contact-button' ] ) ?>
 
