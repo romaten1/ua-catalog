@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3306
--- Час створення: Трв 23 2015 р., 18:38
+-- Час створення: Трв 23 2015 р., 20:01
 -- Версія сервера: 5.5.41-log
 -- Версія PHP: 5.4.35
 
@@ -96,7 +96,15 @@ CREATE TABLE IF NOT EXISTS `category_lang` (
   `lang_id` int(2) NOT NULL,
   `title` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Дамп даних таблиці `category_lang`
+--
+
+INSERT INTO `category_lang` (`id`, `category_id`, `lang_id`, `title`) VALUES
+(1, 1, 2, 'Предметы гигиены'),
+(2, 3, 2, 'Обувь');
 
 -- --------------------------------------------------------
 
@@ -205,7 +213,14 @@ CREATE TABLE IF NOT EXISTS `category_third_lang` (
   `lang_id` int(2) NOT NULL,
   `title` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Дамп даних таблиці `category_third_lang`
+--
+
+INSERT INTO `category_third_lang` (`id`, `category_id`, `lang_id`, `title`) VALUES
+(1, 2, 2, 'Пиджаки');
 
 -- --------------------------------------------------------
 
