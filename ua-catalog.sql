@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3306
--- Час створення: Трв 23 2015 р., 17:45
+-- Час створення: Трв 23 2015 р., 18:38
 -- Версія сервера: 5.5.41-log
 -- Версія PHP: 5.4.35
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- База даних: `ua-catalog`
 --
+CREATE DATABASE IF NOT EXISTS `ua-catalog` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `ua-catalog`;
 
 -- --------------------------------------------------------
 
@@ -256,8 +258,7 @@ CREATE TABLE IF NOT EXISTS `collection` (
 --
 
 INSERT INTO `collection` (`id`, `user_id`, `product_id`, `created_at`) VALUES
-(3, 3, 8, 1429364396),
-(6, 3, 6, 1429468220);
+(3, 3, 8, 1429364396);
 
 -- --------------------------------------------------------
 

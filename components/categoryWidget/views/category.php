@@ -31,7 +31,7 @@ $category_third){
     <?php
     for ($i = $start; $i < ( $start + 4 ); $i ++) {
         ?>
-    <div class="categories-item <?= $i == 1 ? 'active' : ''; ?>">
+    <div class="categories-item <?= Yii::$app->request->queryParams['id'] == $category_main[$i]['id'] ? 'active' : ''; ?>">
         <a href="<?= Url::to( [ '/category/view', 'id' => $category_main[$i]['id'] ] ); ?>"
            title="<?= $category_main[$i]['title']; ?>"
            class="<?= $category_main[$i]['class']; ?>">
@@ -45,7 +45,7 @@ $category_third){
 $main_count < ( $start + 4 );
 $main_count ++) {
 ?>
-<div class="sub-categories <?= $main_count == 1 ? 'active' : ''; ?>"
+<div class="sub-categories <?= $main_count == (Yii::$app->request->queryParams['id']-1 ) ? 'active' : ''; ?>"
      id="<?= $category_main[$main_count]['class']; ?>">
     <?php
     foreach ($category_second as $second_item) {
